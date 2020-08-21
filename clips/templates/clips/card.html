@@ -3,7 +3,7 @@
 
 <div class="card bg-dark text-white">
     {% if not clip.clip_archived %}
-    <img class="card-img-top" width="100%" height="auto" src="{% static 'img/offline.jpg' %}" alt="offline" />
+    <img class="card-img-top" width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline" />
     {% else %}
     <video class="card-img-top" width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
         controls>
