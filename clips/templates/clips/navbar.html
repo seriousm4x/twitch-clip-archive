@@ -34,14 +34,14 @@
         <form action="{% url 'search_results' %}" method="GET" class="nav navbar-nav ml-auto form-inline my-2 my-lg-0"
             style="margin-right: 5px;">
             <input name="search" class="form-control mr-sm-2 bg-dark text-white" type="text"
-                placeholder="Titel, Creator oder Clip ID" aria-label="Search">
-            <select name="game" class="selectpicker" data-live-search="true" title="Kategorie"
+                placeholder="Title, creator or clip ID" aria-label="Search">
+            <select name="game" class="selectpicker" data-live-search="true" title="Category"
                 data-selected-text-format="count" data-size="10">
                 {% for game in games %}
                 <option>{{ game.name }}</option>
                 {% endfor %}
             </select>
-            <select name="sort" class="selectpicker show-tick" title="Sortieren nach" data-width="auto" data-size="6">
+            <select name="sort" class="selectpicker show-tick" title="Sort by" data-width="auto" data-size="6">
                 {% for option in sort_options %}
                 <option>{{ option }}</option>
                 {% endfor %}
