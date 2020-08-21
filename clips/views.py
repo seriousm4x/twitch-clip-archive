@@ -15,8 +15,8 @@ from .utils import matchGameToClip
 
 class globalConf():
     # change these according to your language
-    headline_top_week = "🔥 Top Clips of the week"
-    headline_top_month = "🤩 Top Clips of the month"
+    headline_top_week = "🔥 Top clips of the week"
+    headline_top_month = "🤩 Top clips of the month"
     headline_top_alltime = "🏆 All time favorites"
     headline_search = "🔍 Search results"
     headline_stats = "📈 Statistics"
