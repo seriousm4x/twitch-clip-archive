@@ -1,13 +1,14 @@
 import os
 import shutil
+from pathlib import Path
 
 import environ
 import requests
 import youtube_dl
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from clips.models import Clip, Game
-from django.conf import settings
 
 
 class Logger(object):
@@ -37,14 +38,14 @@ class Command(BaseCommand):
         env.read_env(os.path.join(settings.BASE_DIR, ".env"))
 
         # set download path for clips and thumbnails
-        self.download_path = env("MEDIA_ROOT")
+        self.download_path = Path(env("MEDIA_ROOT"))
         self.clips_path = os.path.join(self.download_path, "clips")
         self.clip_thumbnails_path = os.path.join(
             self.download_path, "clip_thumbnails")
         self.game_thumbnails_path = os.path.join(
             self.download_path, "game_thumbnails")
         for path in self.download_path, self.clips_path, self.clip_thumbnails_path, self.game_thumbnails_path:
-            if not os.path.isdir(path):
+            if not os.path.exists(path):
                 os.mkdir(path)
 
     def handle(self, **options):
