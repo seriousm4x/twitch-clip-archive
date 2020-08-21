@@ -1,0 +1,13 @@
+[Unit]
+Description=django-twitch-archive
+After = network.target
+
+[Service]
+User=max
+Group=max
+WorkingDirectory=/home/max/git/django-twitch-archive/
+ExecStart=/home/max/git/django-twitch-archive/.venv/bin/gunicorn -b localhost:8000 --workers 13 django-twitch-archive.wsgi:application
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

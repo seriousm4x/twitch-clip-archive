@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="de">
+
+    {% include 'clips/header.html' %}
+
+    <body class="bg-dark text-white">
+
+        {% include "clips/navbar.html" %}
+
+        <div class="container-fluid bg-dark text-white">
+
+            <div class="headline">
+                <p>{{ headline }}</p>
+
+                <p> {% if results == 1 %}
+                    {{ results }} Clip gefunden
+                    {% else %}
+                    {{ results }} Clips gefunden
+                    {% endif %}
+
+                    {% if request.GET.search %}
+                    für "{{ request.GET.search }}"
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="grid">
+                {% if clips %}
+                {% for clip in page_obj %}
+                {% include "clips/card.html" %}
+                {% endfor %}
+                {% else %}
+                <p>No clips found.</p>
+                {% endif %}
+            </div>
+
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="?{{ query }}&page=1">&lt;&lt;</a>
+                    </li>
+
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ query }}&page={{ page_obj.previous_page_number }}">&lt;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">&lt;</a>
+                    </li>
+                    {% endif %}
+
+                    {% for i in page_obj.paginator.page_range %}
+                    {% if i <= page_obj.number|add:5 and i >= page_obj.number|add:-5 %}
+                    {% if page_obj.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" href="{{ query }}&page={{ i }}">{{ i }}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ query }}&page={{ i }}">{{ i }}</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ query }}&page={{ page_obj.next_page_number }}">&gt;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">&gt;</a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ request.sort }}&page={{ page_obj.paginator.num_pages }}">&gt;&gt;</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+        {% include 'clips/footer.html' %}
+
+    </body>
+
+</html>

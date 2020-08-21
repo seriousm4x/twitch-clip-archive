@@ -1,0 +1,52 @@
+{% load static %}
+{% block content %}
+
+<div class="card bg-dark text-white">
+    {% if not clip.clip_archived %}
+    <img class="card-img-top" width="100%" height="auto" src="{% static 'img/offline.jpg' %}" alt="offline" />
+    {% else %}
+    <video class="card-img-top" width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
+        controls>
+        <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
+    </video>
+    {% endif %}
+    <div class="card-body">
+        <h4 class="card-title">{{ clip.title }}</h4>
+        <div class="card-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 game-thumbnail-col">
+                        <img class="game-thumbnail" src="{{ MEDIA_URL }}game_thumbnails/{{ clip.game_id }}.jpg"
+                            alt="{{ clip.game_title }}" />
+                    </div>
+                    <div class="col-9 category-date">
+                        <div>{{ clip.game_title }}</div>
+                        <div>{{ clip.created_at }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer container">
+        <div class="row">
+            <div class="col-sm card-footer-center">
+                {{ clip.view_count }} Views
+            </div>
+            <div class="col-sm card-footer-center">
+                <a href="{{ clip.url }}" target="_new">
+                    {% if clip.deleted_on_twitch %}
+                    <img class="twitch-icon" src="{% static 'svg/twitch-dead.svg' %}" alt="twitch-dead" />
+                    {% else %}
+                    <img class="twitch-icon" src="{% static 'svg/twitch.svg' %}" alt="twitch" />
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col-sm card-footer-center">
+                <a class="text-white" href="https://twitch.tv/{{ clip.creator_name }}"
+                    target="_new">{{ clip.creator_name }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

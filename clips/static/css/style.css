@@ -1,0 +1,274 @@
+
+
+body {
+	margin: 0;
+	height: 100%;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.navbar {
+	box-shadow: 0 -2px 20px #111;
+}
+
+h4 {
+	font-weight: bold;
+}
+
+button {
+	border: none;
+	border-radius: 1rem;
+	width: fit-content;
+	padding: 10px 30px 10px 30px;
+	box-shadow: -2px -2px 10px #485159, 2px 2px 10px #15191c;
+	transition: box-shadow 0.1s ease-in-out;
+	font-weight: bold;
+}
+
+button:hover {
+	box-shadow: -2px -2px 5px #485159, 2px 2px 5px #15191c;
+}
+
+select {
+	background-color: #343a40 !important;
+}
+
+.dropdown {
+	margin-right: 0.5rem;
+}
+
+.headline>p {
+	width: 90%;
+	margin: 3rem auto 1rem 3rem;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.headline>p>a {
+	font-size: 0.7em;
+	margin-left: 2rem;
+}
+
+.show-more {
+	width: 90%;
+	margin: auto;
+	text-align: left;
+}
+
+.show-more>form {
+	text-align: center;
+}
+
+.grid {
+	display: grid;
+	grid-gap: 30px;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	width: 96%;
+	margin: auto;
+}
+
+.grid-featured {
+	display: grid;
+	grid-gap: 30px;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 0fr));
+	grid-auto-flow: column;
+	grid-auto-columns: minmax(400px, 1fr);
+	overflow-x: auto;
+	padding: 2rem;
+	margin-bottom: 4rem;
+}
+
+div[class*="container"] {
+	width: 100%;
+	max-width: 100%;
+}
+
+button[class*="dropdown-toggle btn-light"] {
+	background-color: #343a40 !important;
+	border: none;
+	color: #eee;
+}
+
+.dropdown-toggle:hover {
+	color: #eee;
+}
+
+div[class*="col"] {
+	padding-left: 0px;
+}
+
+.card {
+	border-radius: 1rem;
+	border: none;
+	box-shadow: -4px -4px 14px #485159, 4px 4px 14px #15191c
+}
+
+.card:hover {
+	transition: box-shadow 0.2s ease-in-out;
+	box-shadow: -2px -2px 7px #485159, 2px 2px 7px #15191c
+}
+
+.card:focus {
+	transition: box-shadow 0.1s ease-in-out;
+	outline: 0;
+}
+
+.card-img,
+.card-img-top {
+	border-radius: 1rem 1rem 0rem 0rem;
+}
+
+.card-body {
+	padding: 30px;
+}
+
+.category-date {
+	margin: auto;
+}
+
+.card-footer-center {
+	text-align: center;
+}
+
+.twitch-icon {
+	fill: #6441A4;
+	position: absolute;
+	height: 100%;
+}
+
+.card-footer:last-child {
+	border-radius: 0rem 0rem 1rem 1rem;
+}
+
+.footer-views {
+	float: left;
+}
+
+.footer-creator {
+	float: right;
+}
+
+.form-control {
+	border: none;
+	box-shadow: -2px -2px 10px #485159, 2px 2px 10px #15191c;
+	outline: none;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+	background-color: #343a40;
+}
+
+.form-control:hover {
+	color: #212529;
+	box-shadow: -2px -2px 5px #485159, 2px 2px 5px #15191c;
+}
+
+.form-control::placeholder {
+	color: #eee;
+}
+
+.pagination {
+	margin: 5rem;
+}
+
+.game-thumbnail {
+	width: 100%;
+}
+
+a.bg-dark:focus,
+a.bg-dark:hover,
+button.bg-dark:focus,
+button.bg-dark:hover {
+	background-color: #343a40 !important;
+}
+
+.dropdown-menu {
+	background-color: #343a40;
+}
+
+.dropdown-item {
+	color: #eee;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:active,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:focus,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+	color: #eee;
+}
+
+.stats-container {
+	margin-bottom: 4rem;
+}
+
+.page-link {
+	background-color: #343a40;
+	color: #eee;
+
+}
+
+.page-link:hover, .page-item:hover{
+	color: #6441A4;
+	background-color: #eee;
+}
+
+.page-item.disabled .page-link {
+	background-color: #343a40;
+	color: #eee;
+}
+
+.page-item.active .page-link {
+	background-color: #6441A4;
+	border-color: #eee;
+}
+
+
+@media (max-width: 576px) {
+
+	.headline > p {
+		margin: 1rem auto 0rem 0rem;
+		font-size: 1.5em;
+	}
+
+	.grid-featured {
+		padding: 1em;
+		grid-template-columns: repeat(auto-fill, minmax(90%, 0fr));
+		grid-auto-columns: minmax(100%, 1fr);
+	}
+
+	.card-text {
+		display: none;
+	}
+
+	.grid {
+		grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+		width: 100%;
+		margin-top: 2em;
+	}
+	
+	.twitch-icon {
+		height: auto;
+		width: 12%;
+		position: relative;
+	}
+
+	.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+		width: 100%;
+	}
+
+	.dropdown {
+		margin-right: 0;
+	}
+
+	.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+		width: 100% !important;
+	}
+
+	.nav.navbar-nav.ml-auto.form-inline.my-2.my-lg-0 > * {
+		margin-top: 1em !important;
+	}
+
+}
+
+@media (max-width: 992px) {
+	.form-inline {
+		align-items: baseline;
+	}
+}

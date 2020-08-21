@@ -1,0 +1,6 @@
+django
+django-environ
+gunicorn
+python-dateutil
+requests
+youtube-dl

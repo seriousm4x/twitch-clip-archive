@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'clips/header.html' %}
+
+<body class="bg-dark text-white">
+
+    {% include 'clips/navbar.html' %}
+
+    <div class="container-fluid bg-dark text-white">
+
+        <div class="headline">
+            <p>{{ headline_top_week }}
+                <a class="text-white" href="{% url 'topweek' %}">Show more</a>
+            </p>
+        </div>
+
+        <div class="grid-featured dragscroll">
+            {% if clips_top_week %}
+            {% for clip in clips_top_week %}
+
+            {% include 'clips/card.html' %}
+
+            {% endfor %}
+
+            <div class="show-more">
+                <form action="{% url 'topweek' %}">
+                    <button class="bg-dark text-white" type="submit">Show more</button>
+                </form>
+            </div>
+
+            {% else %}
+            <p>No clips found.</p>
+            {% endif %}
+        </div>
+
+        <div class="headline">
+            <p>{{ headline_top_month }}
+                <a class="text-white" href="{% url 'topmonth' %}">Show more</a>
+            </p>
+        </div>
+
+        <div class="grid-featured dragscroll">
+            {% if clips_top_month %}
+            {% for clip in clips_top_month %}
+
+            {% include 'clips/card.html' %}
+
+            {% endfor %}
+
+            <div class="show-more">
+                <form action="{% url 'topmonth' %}">
+                    <button class="bg-dark text-white" type="submit">Show more</button>
+                </form>
+            </div>
+
+            {% else %}
+            <p>No clips found.</p>
+            {% endif %}
+        </div>
+
+        <div class="headline">
+            <p>{{ headline_top_alltime }}
+                <a class="text-white" href="{% url 'topalltime' %}">Show more</a>
+            </p>
+        </div>
+
+        <div class="grid-featured dragscroll">
+            {% if clips_top_alltime %}
+            {% for clip in clips_top_alltime %}
+            {% include 'clips/card.html' %}
+            {% endfor %}
+            <div class="show-more">
+                <form action="{% url 'topalltime' %}">
+                    <button class="bg-dark text-white" type="submit">Show more</button>
+                </form>
+            </div>
+            {% else %}
+            <p>No clips found.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    {% include 'clips/footer.html' %}
+
+</body>
+
+</html>
