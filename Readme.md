@@ -1,7 +1,7 @@
 
 # Django-Twitch-Archive
 
-This archive is a complete side backup from a twitch streamers clips. It will store all metadata available in a database and give you a webinterface with useful features. [A live demo can be seen here](https://clips.itssoley.de/).
+This project creates a complete off side backup of the clips of a Twitch streamer. Top clips on the start page per week/month/ever, search function and statistics. [A live demo can be seen here](https://clips.itssoley.de/).
 
 # Screenshots
 
