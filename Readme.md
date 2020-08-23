@@ -140,7 +140,7 @@ I attached a file [django-twitch-archive.service](django-twitch-archive.service)
 Next, run 
 
 ```
-sudo systemctl daemon-load
+sudo systemctl daemon-reload
 sudo systemctl enable --now django-twitch-archive.service
 ```
 
