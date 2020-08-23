@@ -3,7 +3,17 @@
 
 This archive is a complete side backup from a twitch streamers clips. It will store all metadata available in a database and give you a webinterface with useful features. [A live demo can be seen here](https://clips.itssoley.de/).
 
-![screenshot.png](screenshot.png)
+# Screenshots
+
+### Font page
+![images/screenshot1.png](images/screenshot1.png)
+
+### Search function
+![images/screenshot2.png](images/screenshot2.png)
+
+### Statistics
+![images/screenshot3.png](images/screenshot3.png)
+![images/screenshot4.png](images/screenshot4.png)
 
 # Installation process
 
