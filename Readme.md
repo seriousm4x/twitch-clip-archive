@@ -149,9 +149,7 @@ sudo systemctl enable --now django-twitch-archive.service
 I've created a cronjob which does this automatically every hour.
 
 ```
-@hourly /home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py updateDB && \
-/home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py download && \
-/home/max/git/django-twitch-archive/.venv/bin/python manage.py collectstatic --noinput
+@hourly /home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py updateDB && /home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py download && /home/max/git/django-twitch-archive/.venv/bin/python manage.py collectstatic --noinput
 ```
 
 ## Change language
