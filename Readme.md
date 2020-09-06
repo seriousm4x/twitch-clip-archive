@@ -32,6 +32,12 @@ This script will setup your python venv, generate a .env file and setup the djan
 ./setup.sh
 ```
 
+After that, load your python venv to use django
+
+```
+source .venv/bin/activate
+```
+
 ## 3. Add clips to database
 
 ```
