@@ -1,9 +1,8 @@
 import datetime
-import os
 import json
+import os
 
 from dateutil import relativedelta
-from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
 from django.shortcuts import render
@@ -31,8 +30,10 @@ class globalConf():
 def index(request):
     broadcaster_name = TwitchSettings.objects.all().get().broadcaster_name
     games = Game.objects.all()
-    last_week = datetime.datetime.now() - datetime.timedelta(weeks=1)
-    last_month = datetime.datetime.now() - datetime.timedelta(weeks=4)
+    last_week = datetime.datetime.now(
+        tz=timezone.get_current_timezone()) - datetime.timedelta(weeks=1)
+    last_month = datetime.datetime.now(
+        tz=timezone.get_current_timezone()) - datetime.timedelta(weeks=4)
 
     clips_top_week = Clip.objects.filter(
         created_at__gte=last_week).order_by("-view_count")[:8]
@@ -62,7 +63,8 @@ def index(request):
 def topweek(request):
     broadcaster_name = TwitchSettings.objects.all().get().broadcaster_name
     games = Game.objects.all()
-    last_week = datetime.datetime.now() - datetime.timedelta(weeks=1)
+    last_week = datetime.datetime.now(
+        tz=timezone.get_current_timezone()) - datetime.timedelta(weeks=1)
 
     clips_top_week = Clip.objects.filter(
         created_at__gte=last_week).order_by("-view_count")
@@ -88,7 +90,8 @@ def topweek(request):
 def topmonth(request):
     broadcaster_name = TwitchSettings.objects.all().get().broadcaster_name
     games = Game.objects.all()
-    last_month = datetime.datetime.now() - datetime.timedelta(weeks=4)
+    last_month = datetime.datetime.now(
+        tz=timezone.get_current_timezone()) - datetime.timedelta(weeks=4)
 
     clips_top_month = Clip.objects.filter(
         created_at__gte=last_month).order_by("-view_count")
