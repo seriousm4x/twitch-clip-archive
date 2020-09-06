@@ -24,60 +24,15 @@ git clone https://github.com/seriousm4x/django-twitch-archive.git
 cd django-twitch-archive
 ```
 
-## 2. Get your .env file ready
+## 2. Run setup script
 
-Copy the "TEMPLATE.env" to ".env" and edit the file to your needs.
-
-## 3. Create python virtual environment
+This script will setup your python venv, generate a .env file and setup the django database.
 
 ```
-python3 -m venv .venv
+./setup.sh
 ```
 
-On Linux/Mac:
-```
-source .venv/bin/activate
-```
-On Windows:
-```
-.venv/Scripts/activate
-```
-
-## 4. Install python dependencies
-
-```
-pip install -r requirements.txt
-```
-
-## 5. Initialize database
-
-```
-python manage.py migrate
-```
-
-## 6. Create a superuser for the database
-
-```
-python manage.py createsuperuser
-```
-
-## 7. Add Twitch credentials to database
-
-```
-python manage.py runserver
-```
-
-Navigate to [http://localhost:8000/admin/](http://localhost:8000/admin/), login with your  account created in the previous step.
-
-Click on "Twitch Settingss" and add a new entry. There are 5 fields, but you just need to fill the 3 marked fields saying "CHANGE THIS".
-
-"So what do I paste there?"
-
-"Broadcaster name" is the twitch streamer you want to save the clips from. For example "shroud". Make sure it matches exactly the twitch username.
-
-"Client id" and "Client secret" can be gathered from [https://dev.twitch.tv/console/apps](https://dev.twitch.tv/console/apps). Create a new app, give it whatever name you like, add "http://localhost" as URL and select a category. Once done, twitch will give you a "Client-ID". Click on "New secret" and paste both into the django database and save it.
-
-## 8. Add clips to database
+## 3. Add clips to database
 
 ```
 python manage.py updateDB
@@ -87,7 +42,7 @@ This will search for all clips from the streamer. Not just Twitch's limit of 100
 
 By now you can see the website at [http://localhost:8000/](http://localhost:8000/) when you run the server. But there are no clips or images yet. Just metadata.
 
-## 9. Download clips and thumbnails
+## 4. Download clips and thumbnails
 
 ```
 python manage.py download
@@ -95,7 +50,7 @@ python manage.py download
 
 This will download all data available in our database to the MEDIA_ROOT path.
 
-## 10. Run the server
+## 5. Run the server
 
 ```
 python manage.py runserver
@@ -149,15 +104,8 @@ sudo systemctl enable --now django-twitch-archive.service
 I've created a cronjob which does this automatically every hour.
 
 ```
-@hourly /home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py updateDB && /home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py download && /home/max/git/django-twitch-archive/.venv/bin/python manage.py collectstatic --noinput
+0 */6 * * * /home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py updateDB && /home/max/git/django-twitch-archive/.venv/bin/python /home/max/git/django-twitch-archive/manage.py download && /home/max/git/django-twitch-archive/.venv/bin/python home/max/git/django-twitch-archive/manage.py collectstatic --noinput
 ```
-
-## Change language
-
-You can edit [clips/views.py](clips/views.py) where it says `class globalConf():`.
-
-It's not the best solution, but will work for now.
-
 
 # Todo
 
