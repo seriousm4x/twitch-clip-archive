@@ -207,7 +207,7 @@ def statistics(request):
         "labels": []
     }
     for i in range(5, -1, -1):
-        first_day_of_month = timezone.now().date().replace(
+        first_day_of_month = timezone.now().replace(
             day=1) - relativedelta.relativedelta(months=i)
         amount = Clip.objects.filter(
             created_at__range=[first_day_of_month, first_day_of_month + relativedelta.relativedelta(months=1)]).count()
