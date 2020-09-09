@@ -35,8 +35,9 @@
                 {% for game in games %}
                 {% if game.name == searchgame %}
                 <option selected>{{ game.name }}</option>
-                {% endif %}
+                {% else %}
                 <option>{{ game.name }}</option>
+                {% endif %}
                 {% endfor %}
             </select>
             <select name="sort" class="form-control mr-sm-2 my-lg-0">
