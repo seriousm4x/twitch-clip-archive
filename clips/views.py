@@ -141,8 +141,11 @@ def search(request):
     broadcaster_name = TwitchSettings.objects.all().get().broadcaster_name
     games = Game.objects.all()
     search = request.GET.get("search")
-    sort = request.GET.get("sort")
     searchgame = request.GET.get("game")
+    sort = request.GET.get("sort")
+
+    if searchgame == "All games":
+        searchgame = ""
 
     if searchgame:
         game_id = Game.objects.filter(name=searchgame).get().game_id
@@ -156,6 +159,7 @@ def search(request):
     if sort in globalConf().sort_options:
         object_list = object_list.order_by(globalConf().sort_options[sort])
     else:
+        sort = ""
         object_list = object_list.order_by("-view_count")
 
     matchGameToClip(object_list)
@@ -171,11 +175,12 @@ def search(request):
                "headline": globalConf().headline_search,
                "results": len(object_list),
                "broadcaster_name": broadcaster_name,
-               "sort_options": globalConf().sort_options
+               "sort_options": globalConf().sort_options,
+               "query": str("?sort=" + sort + "&game=" +
+                            searchgame + "&search=" + search).replace(" ", "+"),
+               "searchquery": search,
+               "searchgame": searchgame
                }
-
-    context["query"] = str("?sort=" + sort + "&game=" +
-                           searchgame + "&search=" + search).replace(" ", "+")
 
     return render(request, "clips/search.html", context)
 

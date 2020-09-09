@@ -1,16 +1,15 @@
 {% block content %}
 
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
-
-    <a class="navbar-brand text-white" href="{% url 'index' %}">{{ broadcaster_name }} 🎬</a>
-    <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'index' %}">{{ broadcaster_name }} 🎬</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
@@ -28,25 +27,26 @@
                 <a class="nav-link" href="{% url 'statistics' %}">Stats</a>
             </li>
         </ul>
-    </div>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form action="{% url 'search_results' %}" method="GET" class="nav navbar-nav ml-auto form-inline my-2 my-lg-0"
-            style="margin-right: 5px;">
-            <input name="search" class="form-control mr-sm-2 bg-dark text-white" type="text"
-                placeholder="Title, creator or clip ID" aria-label="Search">
-            <select name="game" class="selectpicker" data-live-search="true" title="Category"
-                data-selected-text-format="count" data-size="10">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"
+                value="{{ searchquery }}">
+            <select name="game" class="form-control mr-sm-2">
+                <option selected>All games</option>
                 {% for game in games %}
+                {% if game.name == searchgame %}
+                <option selected>{{ game.name }}</option>
+                {% endif %}
                 <option>{{ game.name }}</option>
                 {% endfor %}
             </select>
-            <select name="sort" class="selectpicker show-tick" title="Sort by" data-width="auto" data-size="6">
+            <select name="sort" class="form-control mr-sm-2 my-lg-0">
+                <option selected disabled>Sort by</option>
+                <option disabled>---</option>
                 {% for option in sort_options %}
                 <option>{{ option }}</option>
                 {% endfor %}
             </select>
-            <button class="btn my-2 my-sm-0 bg-dark text-white" type="submit">🔍</button>
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>
