@@ -15,12 +15,12 @@ h4 {
 .headline>p {
 	width: 90%;
 	margin: 3rem auto 1rem 3rem;
-	font-size: 2em;
+	font-size: 2rem;
 	font-weight: bold;
 }
 
 .headline>p>a {
-	font-size: 0.7em;
+	font-size: 1.4rem;
 	margin-left: 2rem;
 }
 
@@ -146,16 +146,46 @@ div[class*="col"] {
 	border-color: #eee;
 }
 
+.singleclip {
+	width: 96%;
+	margin: 3rem auto;
+}
+
+.clip-info-box {
+	margin-top: 2rem;
+}
+
+.clip-info-headline {
+	width: 90%;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.clip-info-badges {
+	font-size: 1.6rem;
+}
+
+.recommended-headline {
+	margin-bottom: 1rem;
+}
+
+.recommended-row {
+	margin-bottom: 1rem;
+}
+
+.recommended-img {
+	width: 100%;
+}
 
 @media (max-width: 576px) {
 
 	.headline > p {
 		margin: 1rem auto 0rem 0rem;
-		font-size: 1.5em;
+		font-size: 1.5rem;
 	}
 
 	.grid-featured {
-		padding: 1em;
+		padding: 1rem;
 		grid-template-columns: repeat(auto-fill, minmax(90%, 0fr));
 		grid-auto-columns: minmax(100%, 1fr);
 	}
@@ -167,7 +197,7 @@ div[class*="col"] {
 	.grid {
 		grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
 		width: 100%;
-		margin-top: 2em;
+		margin-top: 2rem;
 	}
 	
 	.twitch-icon {
@@ -176,4 +206,10 @@ div[class*="col"] {
 		position: relative;
 	}
 
+}
+
+@media (max-width: 991px) {
+	.recommended-headline {
+		margin-top: 2rem;
+	}	
 }

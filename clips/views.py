@@ -248,3 +248,23 @@ def statistics(request):
     }
 
     return render(request, "clips/stats.html", context)
+
+
+def singleclip(request, clip_id):
+    broadcaster_name = TwitchSettings.objects.all().get().broadcaster_name
+    games = Game.objects.all()
+    clip_info = Clip.objects.filter(Q(clip_id__icontains=clip_id)).get()
+    recommended_clips = Clip.objects.filter(Q(created_at__range=[
+                                            clip_info.created_at - relativedelta.relativedelta(days=2), clip_info.created_at + relativedelta.relativedelta(weeks=7)])).order_by("-view_count")[:10]
+
+    matchGameToClip(clip_info)
+    matchGameToClip(recommended_clips)
+
+    context = {
+        "broadcaster_name": broadcaster_name,
+        "clip": clip_info,
+        "recommended": recommended_clips,
+        "games": games,
+        "sort_options": globalConf().sort_options
+    }
+    return render(request, "clips/clip.html", context)

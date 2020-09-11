@@ -1,0 +1,85 @@
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="de">
+
+{% include 'clips/header.html' %}
+
+<body class="bg-dark text-white">
+
+    {% include "clips/navbar.html" %}
+
+    <div class="container-fluid bg-dark text-white">
+        <div class="singleclip">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        {% if not clip.clip_archived %}
+                        <img class="card-img-top" width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}"
+                            alt="offline" />
+                        {% else %}
+                        <video class="card-img-top" width="100%" height="auto"
+                            poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg" controls>
+                            <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
+                        </video>
+                        <div class="clip-info-box">
+                            <div>
+                                <p class="clip-info-headline">
+                                    {{ clip.title }}
+                                </p>
+                                <div class="clip-info-badges">
+                                    <span class="badge badge-pill badge-light">{{ clip.game_title }}</span>
+                                    <span class="badge badge-pill badge-light">{{ clip.view_count|intcomma }}
+                                        Views</span>
+                                    <span class="badge badge-pill badge-light">{{ clip.created_at }}</span>
+                                    <a href="https://twitch.tv/{{ clip.creator_name }}" target="_new"
+                                        class="badge badge-pill badge-success">{{ clip.creator_name }}</a>
+                                    {% if clip.deleted_on_twitch %}
+                                    <span class="badge badge-pill badge-danger">Deleted on Twitch</span>
+                                    {% else %}
+                                    <a href="{{ clip.url }}" target="_new" class="badge badge-pill badge-success">Clip
+                                        on Twitch</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-4 pl-3">
+                        <h3 class="recommended-headline">Recommended</h3>
+                        <div class="container">
+                            {% for clip in recommended %}
+                            <div class="row recommended-row">
+                                <div class="col-5">
+                                    <a class="text-white" href="{% url 'singleclip' clip.clip_id %}">
+                                        <img class="recommended-img"
+                                            src="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
+                                            alt="{{ clip.title }}">
+                                    </a>
+                                </div>
+                                <div class="col-7">
+                                    <a class="text-white" href="{% url 'singleclip' clip.clip_id %}">
+                                        <h5>{{ clip.title }}</h5>
+                                    </a>
+                                    <p>{{ clip.game_title }}<br>
+                                        {{ clip.created_at }}
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'clips/footer.html' %}
+
+</body>
+
+</html>
+
+{% endblock %}

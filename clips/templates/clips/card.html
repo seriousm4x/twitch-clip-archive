@@ -1,17 +1,19 @@
 {% load static %}
+{% load humanize %}
 {% block content %}
 
 <div class="card bg-dark text-white">
     {% if not clip.clip_archived %}
     <img class="card-img-top" width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline" />
     {% else %}
-    <video class="card-img-top" width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
-        controls>
+    <video class="card-img-top" width="100%" height="auto"
+        poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg" controls>
         <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
     </video>
     {% endif %}
     <div class="card-body">
-        <h4 class="card-title">{{ clip.title }}</h4>
+        <h4 class="card-title"><a class="text-white" href="{% url 'singleclip' clip.clip_id %}">{{ clip.title }}</a>
+        </h4>
         <div class="card-text">
             <div class="container">
                 <div class="row">
@@ -30,7 +32,7 @@
     <div class="card-footer container">
         <div class="row">
             <div class="col-sm card-footer-center">
-                {{ clip.view_count }} Views
+                {{ clip.view_count|intcomma }} Views
             </div>
             <div class="col-sm card-footer-center">
                 <a href="{{ clip.url }}" target="_new">

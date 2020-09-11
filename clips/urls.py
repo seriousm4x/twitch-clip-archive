@@ -10,5 +10,6 @@ urlpatterns = [
     path('top/month/', views.topmonth, name='topmonth'),
     path('top/alltime/', views.topalltime, name='topalltime'),
     path('search/', views.search, name='search_results'),
-    path('stats/', views.statistics, name='statistics')
+    path('stats/', views.statistics, name='statistics'),
+    path('<slug:clip_id>/', views.singleclip, name="singleclip")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
