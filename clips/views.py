@@ -22,8 +22,8 @@ class globalConf():
     sort_options = {
         "Views descending": "-view_count",
         "Views ascending": "view_count",
-        "Date descending": "-created_at"
-        "Date ascending": "created_at",
+        "Date descending": "-created_at",
+        "Date ascending": "created_at"
     }
 
 
