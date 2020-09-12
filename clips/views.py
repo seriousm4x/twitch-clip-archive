@@ -150,8 +150,8 @@ def search(request):
     if searchgame:
         game_id = Game.objects.filter(name=searchgame).get().game_id
         object_list = Clip.objects.filter(
-            Q(title__icontains=search) & Q(game_id__icontains=game_id) | Q(creator_name__icontains=search) & Q(
-                game_id__icontains=game_id) | Q(clip_id__icontains=search) & Q(game_id__icontains=game_id))
+            Q(title__icontains=search) & Q(game_id__exact=game_id) | Q(creator_name__icontains=search) & Q(
+                game_id__exact=game_id) | Q(clip_id__icontains=search) & Q(game_id__exact=game_id))
     else:
         object_list = Clip.objects.filter(
             Q(title__icontains=search) | Q(creator_name__icontains=search) | Q(clip_id__icontains=search))
@@ -231,7 +231,7 @@ def statistics(request):
 
     for category in most_clips_by_category:
         game_title = Game.objects.filter(
-            game_id__icontains=category["game_id"]).get().name
+            game_id__exact=category["game_id"]).get().name
         category.pop("game_id", None)
         clips_by_category["datasets"][0]["data"].append(category["amount"])
         clips_by_category["labels"].append(game_title)
@@ -253,9 +253,12 @@ def statistics(request):
 def singleclip(request, clip_id):
     broadcaster_name = TwitchSettings.objects.all().get().broadcaster_name
     games = Game.objects.all()
-    clip_info = Clip.objects.filter(Q(clip_id__icontains=clip_id)).get()
-    recommended_clips = Clip.objects.filter(Q(created_at__range=[
-                                            clip_info.created_at - relativedelta.relativedelta(days=2), clip_info.created_at + relativedelta.relativedelta(weeks=7)])).order_by("-view_count")[:10]
+    clip_info = Clip.objects.filter(Q(clip_id__iexact=clip_id)).get()
+    recommended_clips = Clip.objects.filter(
+        Q(created_at__range=[
+            clip_info.created_at - relativedelta.relativedelta(days=2),
+            clip_info.created_at + relativedelta.relativedelta(weeks=7)
+        ])).exclude(clip_id__iexact=clip_id).order_by("-view_count")[:10]
 
     matchGameToClip(clip_info)
     matchGameToClip(recommended_clips)
