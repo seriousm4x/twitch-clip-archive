@@ -265,6 +265,7 @@ def singleclip(request, clip_id):
 
     context = {
         "broadcaster_name": broadcaster_name,
+        "headline": clip_info.title,
         "clip": clip_info,
         "recommended": recommended_clips,
         "games": games,
