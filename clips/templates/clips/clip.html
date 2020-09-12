@@ -17,11 +17,10 @@
                 <div class="row">
                     <div class="col-lg-8">
                         {% if not clip.clip_archived %}
-                        <img class="card-img-top" width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}"
-                            alt="offline" />
+                        <img width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline" />
                         {% else %}
-                        <video class="card-img-top" width="100%" height="auto"
-                            poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg" controls>
+                        <video width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
+                            controls>
                             <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
                         </video>
                         {% endif %}
@@ -55,10 +54,10 @@
                                 <div class="col-5">
                                     <a class="text-white" href="{% url 'singleclip' clip.clip_id %}">
                                         {% if not clip.clip_archived %}
-                                        <img class="recommended-img" src="{% static 'svg/clip-offline.svg' %}"
+                                        <img class="recommended-img rounded" src="{% static 'svg/clip-offline.svg' %}"
                                             alt="offline">
                                         {% else %}
-                                        <img class="recommended-img"
+                                        <img class="recommended-img rounded"
                                             src="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
                                             alt="{{ clip.title }}">
                                         {% endif %}
