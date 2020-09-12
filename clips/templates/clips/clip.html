@@ -24,6 +24,7 @@
                             poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg" controls>
                             <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
                         </video>
+                        {% endif %}
                         <div class="clip-info-box">
                             <div>
                                 <p class="clip-info-headline">
@@ -45,7 +46,6 @@
                                 </div>
                             </div>
                         </div>
-                        {% endif %}
                     </div>
                     <div class="col-lg-4 pl-3">
                         <h3 class="recommended-headline">Recommended</h3>
