@@ -11,17 +11,20 @@
 
     <div class="container-fluid bg-dark text-white">
 
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">
-            {{ headline }}
-            <p> {% if results == 1 %}
-                Found {{ results }} clip
-                {% else %}
-                Found {{ results }} clips
-                {% endif %}
-                {% if request.GET.search %} for "{{ request.GET.search }}"
-                {% endif %}
-            </p>
-        </h1>
+        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">{{ headline }}</h1>
+        <h2 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">
+            {% if results == 1 %}
+            Found {{ results }} clip
+            {% else %}
+            Found {{ results }} clips
+            {% endif %}
+            {% if request.GET.search %}
+            for "{{ request.GET.search }}"
+            {% endif %}
+            {% if request.GET.game %}
+            in "{{ request.GET.game }}"
+            {% endif %}
+        </h2>
 
         <div class="grid p-sm-4">
             {% if clips %}
