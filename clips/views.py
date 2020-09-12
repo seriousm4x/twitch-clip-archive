@@ -20,10 +20,10 @@ class globalConf():
     headline_search = "🔍 Search results"
     headline_stats = "📈 Statistics"
     sort_options = {
-        "Views ascending": "view_count",
         "Views descending": "-view_count",
-        "Date ascending": "created_at",
+        "Views ascending": "view_count",
         "Date descending": "-created_at"
+        "Date ascending": "created_at",
     }
 
 
