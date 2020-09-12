@@ -54,9 +54,14 @@
                             <div class="row recommended-row">
                                 <div class="col-5">
                                     <a class="text-white" href="{% url 'singleclip' clip.clip_id %}">
+                                        {% if not clip.clip_archived %}
+                                        <img class="recommended-img" src="{% static 'svg/clip-offline.svg' %}"
+                                            alt="offline">
+                                        {% else %}
                                         <img class="recommended-img"
                                             src="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
                                             alt="{{ clip.title }}">
+                                        {% endif %}
                                     </a>
                                 </div>
                                 <div class="col-7">
