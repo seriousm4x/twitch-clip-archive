@@ -17,11 +17,15 @@ function clips_by_category(data) {
         type: 'pie',
         data: data,
         options: {
+            responsive: true,
+            maintainAspectRatio: true,
             plugins: {
                 colorschemes: {
                     scheme: 'tableau.Tableau10'
                 }
-            }
+            },
+            responsive: true,
+            maintainAspectRatio: true
         }
     });
 };

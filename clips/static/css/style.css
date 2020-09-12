@@ -29,10 +29,6 @@ body {
     margin-bottom: 4rem;
 }
 
-div[class*="col"] {
-    padding-left: 0px;
-}
-
 .card {
     border-radius: 1rem;
     border: none;
@@ -88,9 +84,6 @@ div[class*="col"] {
         padding: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(90%, 0fr));
         grid-auto-columns: minmax(100%, 1fr);
-    }
-    .card-text {
-        display: none;
     }
     .grid {
         grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));

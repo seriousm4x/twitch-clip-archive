@@ -15,14 +15,14 @@
         <h4 class="card-title font-weight-bold"><a class="text-white"
                 href="{% url 'singleclip' clip.clip_id %}">{{ clip.title }}</a>
         </h4>
-        <div class="card-text">
+        <div class="d-none d-sm-block">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-3">
+                <div class="row d-table">
+                    <div class="col-auto text-left p-0">
                         <img class="img-fluid" src="{{ MEDIA_URL }}game_thumbnails/{{ clip.game_id }}.jpg"
                             alt="{{ clip.game_title }}" />
                     </div>
-                    <div class="col-9 m-auto">
+                    <div class="col-auto d-table-cell align-middle">
                         <div>{{ clip.game_title }}</div>
                         <div>{{ clip.created_at }}</div>
                     </div>

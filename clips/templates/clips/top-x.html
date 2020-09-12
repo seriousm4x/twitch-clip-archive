@@ -11,9 +11,9 @@
 
     <div class="container-fluid bg-dark text-white">
 
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-5">{{ headline }}</h1>
+        <h1 class="page-title font-weight-bold w-100 mt-5 mb-5 ml-sm-5">{{ headline }}</h1>
 
-        <div class="grid p-4">
+        <div class="grid p-sm-4">
             {% if clips %}
             {% for clip in page_obj %}
             {% include "clips/card.html" %}

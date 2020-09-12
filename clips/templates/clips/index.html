@@ -11,11 +11,11 @@
 
     <div class="container-fluid bg-dark text-white">
 
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-5">{{ headline_top_week }}
+        <h1 class="page-title font-weight-bold w-100 mt-5 mb-5 ml-sm-5">{{ headline_top_week }}
             <a href="{% url 'topweek' %}" class="badge badge-pill badge-dark">Show more</a>
         </h1>
 
-        <div class="grid-featured dragscroll p-4">
+        <div class="grid-featured dragscroll p-sm-4">
             {% if clips_top_week %}
             {% for clip in clips_top_week %}
 
@@ -34,11 +34,11 @@
             {% endif %}
         </div>
 
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-5">{{ headline_top_month }}
+        <h1 class="page-title font-weight-bold w-100 mt-5 mb-5 ml-sm-5">{{ headline_top_month }}
             <a href="{% url 'topmonth' %}" class="badge badge-pill badge-dark">Show more</a>
         </h1>
 
-        <div class="grid-featured dragscroll p-4">
+        <div class="grid-featured dragscroll p-sm-4">
             {% if clips_top_month %}
             {% for clip in clips_top_month %}
             {% include 'clips/card.html' %}
@@ -55,11 +55,11 @@
             {% endif %}
         </div>
 
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-5">{{ headline_top_alltime }}
+        <h1 class="page-title font-weight-bold w-100 mt-5 mb-5 ml-sm-5">{{ headline_top_alltime }}
             <a href="{% url 'topalltime' %}" class="badge badge-pill badge-dark">Show more</a>
         </h1>
 
-        <div class="grid-featured dragscroll p-4">
+        <div class="grid-featured dragscroll p-sm-4">
             {% if clips_top_alltime %}
             {% for clip in clips_top_alltime %}
             {% include 'clips/card.html' %}
