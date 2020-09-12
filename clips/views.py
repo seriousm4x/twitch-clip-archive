@@ -256,8 +256,8 @@ def singleclip(request, clip_id):
     clip_info = Clip.objects.filter(Q(clip_id__iexact=clip_id)).get()
     recommended_clips = Clip.objects.filter(
         Q(created_at__range=[
-            clip_info.created_at - relativedelta.relativedelta(days=2),
-            clip_info.created_at + relativedelta.relativedelta(weeks=7)
+            clip_info.created_at - relativedelta.relativedelta(days=5),
+            clip_info.created_at + relativedelta.relativedelta(weeks=2)
         ])).exclude(clip_id__iexact=clip_id).order_by("-view_count")[:10]
 
     matchGameToClip(clip_info)
