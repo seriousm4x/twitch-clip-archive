@@ -18,8 +18,7 @@
                 {% else %}
                 Found {{ results }} clips
                 {% endif %}
-                {% if request.GET.search %}
-                for "{{ request.GET.search }}"
+                {% if request.GET.search %} for "{{ request.GET.search }}"
                 {% endif %}
             </p>
         </h1>
@@ -39,7 +38,6 @@
                 <li class="page-item">
                     <a class="page-link text-white" href="?{{ query }}&page=1">&lt;&lt;</a>
                 </li>
-
                 {% if page_obj.has_previous %}
                 <li class="page-item">
                     <a class="page-link text-white" href="{{ query }}&page={{ page_obj.previous_page_number }}">&lt;</a>
@@ -75,9 +73,9 @@
                     <a class="page-link text-white"
                         href="{{ request.sort }}&page={{ page_obj.paginator.num_pages }}">&gt;&gt;</a>
                 </li>
-
             </ul>
         </nav>
+
     </div>
 
     {% include 'clips/footer.html' %}
