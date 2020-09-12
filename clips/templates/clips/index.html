@@ -11,13 +11,11 @@
 
     <div class="container-fluid bg-dark text-white">
 
-        <div class="headline">
-            <p>{{ headline_top_week }}
-                <a class="text-white" href="{% url 'topweek' %}">Show more</a>
-            </p>
-        </div>
+        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-5">{{ headline_top_week }}
+            <a href="{% url 'topweek' %}" class="badge badge-pill badge-dark">Show more</a>
+        </h1>
 
-        <div class="grid-featured dragscroll">
+        <div class="grid-featured dragscroll p-4">
             {% if clips_top_week %}
             {% for clip in clips_top_week %}
 
@@ -25,10 +23,10 @@
 
             {% endfor %}
 
-            <div class="show-more">
-                <form action="{% url 'topweek' %}">
-                    <button class="btn btn-dark" type="submit">Show more</button>
-                </form>
+            <div class="w-100 m-auto text-center">
+                <h1>
+                    <a href="{% url 'topweek' %}" class="badge badge-pill badge-dark">Show more</a>
+                </h1>
             </div>
 
             {% else %}
@@ -36,24 +34,20 @@
             {% endif %}
         </div>
 
-        <div class="headline">
-            <p>{{ headline_top_month }}
-                <a class="text-white" href="{% url 'topmonth' %}">Show more</a>
-            </p>
-        </div>
+        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-5">{{ headline_top_month }}
+            <a href="{% url 'topmonth' %}" class="badge badge-pill badge-dark">Show more</a>
+        </h1>
 
-        <div class="grid-featured dragscroll">
+        <div class="grid-featured dragscroll p-4">
             {% if clips_top_month %}
             {% for clip in clips_top_month %}
-
             {% include 'clips/card.html' %}
-
             {% endfor %}
 
-            <div class="show-more">
-                <form action="{% url 'topmonth' %}">
-                    <button class="btn btn-dark" type="submit">Show more</button>
-                </form>
+            <div class="w-100 m-auto text-center">
+                <h1>
+                    <a href="{% url 'topmonth' %}" class="badge badge-pill badge-dark">Show more</a>
+                </h1>
             </div>
 
             {% else %}
@@ -61,21 +55,19 @@
             {% endif %}
         </div>
 
-        <div class="headline">
-            <p>{{ headline_top_alltime }}
-                <a class="text-white" href="{% url 'topalltime' %}">Show more</a>
-            </p>
-        </div>
+        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-5">{{ headline_top_alltime }}
+            <a href="{% url 'topalltime' %}" class="badge badge-pill badge-dark">Show more</a>
+        </h1>
 
-        <div class="grid-featured dragscroll">
+        <div class="grid-featured dragscroll p-4">
             {% if clips_top_alltime %}
             {% for clip in clips_top_alltime %}
             {% include 'clips/card.html' %}
             {% endfor %}
-            <div class="show-more">
-                <form action="{% url 'topalltime' %}">
-                    <button class="btn btn-dark" type="submit">Show more</button>
-                </form>
+            <div class="w-100 m-auto text-center">
+                <h1>
+                    <a href="{% url 'topalltime' %}" class="badge badge-pill badge-dark">Show more</a>
+                </h1>
             </div>
             {% else %}
             <p>No clips found.</p>

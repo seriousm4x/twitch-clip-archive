@@ -12,16 +12,12 @@
 
     <div class="container-fluid bg-dark text-white">
 
-        <div class="headline">
-            <p>{{ headline }}</p>
-        </div>
+        <h1 class="page-title font-weight-bold">{{ headline }}</h1>
 
-        <div class="container stats-container">
+        <div class="container-fluid mb-5">
             <div class="row">
-                <div class="col">
-                    <div class="headline">
-                        <p>Most clips per user</p>
-                    </div>
+                <div class="col mt-5">
+                    <h2 class="font-weight-bold">Most clips per user</h2>
                     <table class="table table-striped table-dark table-hover">
                         <thead>
                             <tr>
@@ -41,10 +37,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col">
-                    <div class="headline">
-                        <p>Most views per user</p>
-                    </div>
+                <div class="col mt-5">
+                    <h2 class="font-weight-bold">Most views per user</h2>
                     <table class="table table-striped table-dark table-hover">
                         <thead>
                             <tr>
@@ -66,16 +60,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
-                    <div class="headline">
-                        <p>Clips per month</p>
-                    </div>
+                <div class="col-6 mt-5">
+                    <h2 class="font-weight-bold">Clips per month</h2>
                     <canvas id="clips_in_month" height="200"></canvas>
                 </div>
-                <div class="col-6">
-                    <div class="headline">
-                        <p>Clips per category</p>
-                    </div>
+                <div class="col-6 mt-5">
+                    <h2 class="font-weight-bold">Clips per category</h2>
                     <canvas id="clips_by_category" height="200"></canvas>
                 </div>
             </div>

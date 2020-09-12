@@ -144,7 +144,7 @@ def search(request):
     searchgame = request.GET.get("game")
     sort = request.GET.get("sort")
 
-    if searchgame == "All games":
+    if searchgame == "All":
         searchgame = ""
 
     if searchgame:
