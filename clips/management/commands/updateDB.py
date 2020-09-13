@@ -82,39 +82,43 @@ class Command(BaseCommand):
             clips = req.json()
 
             for i in clips["data"]:
+                valid_dict = i.copy()
+
+                pop_keys = []
+                for key, value in valid_dict.items():
+                    if key not in [field.name for field in Clip._meta.get_fields()]:
+                        pop_keys.append(key)
+                    if value == "":
+                        pop_keys.append(key)
+                if pop_keys:
+                    for key in pop_keys:
+                        valid_dict.pop(key, None)
+
+                clip_id = valid_dict["id"]
+                valid_dict.pop("id", None)
+
                 Clip.objects.update_or_create(
-                    clip_id=i["id"],
-                    defaults={
-                        "url": i["url"],
-                        "embed_url": i["embed_url"],
-                        "broadcaster_id": i["broadcaster_id"],
-                        "broadcaster_name": i["broadcaster_name"],
-                        "creator_id": i["creator_id"],
-                        "creator_name": i["creator_name"],
-                        "game_id": i["game_id"],
-                        "language": i["language"],
-                        "title": i["title"],
-                        "view_count": i["view_count"],
-                        "created_at": i["created_at"],
-                        "thumbnail_url": i["thumbnail_url"]
-                    }
+                    clip_id=clip_id,
+                    defaults=valid_dict
                 )
 
                 # add game to db
-                game_in_db = Game.objects.filter(game_id=i["game_id"]).exists()
-                if not game_in_db:
-                    game_req = requests.get(
-                        "https://api.twitch.tv/helix/games?id={}".format(i["game_id"]), headers=self.helix_header)
-                    game_title = game_req.json()["data"][0]["name"]
-                    game_box_art_url = game_req.json()["data"][0]["box_art_url"].replace(
-                        r"{width}x{height}", "70x93")
-                    Game.objects.update_or_create(
-                        game_id=i["game_id"],
-                        defaults={
-                            "name": game_title,
-                            "box_art_url": game_box_art_url
-                        }
-                    )
+                if "game_id" in valid_dict:
+                    game_in_db = Game.objects.filter(
+                        game_id=valid_dict["game_id"]).exists()
+                    if not game_in_db:
+                        game_req = requests.get(
+                            "https://api.twitch.tv/helix/games?id={}".format(valid_dict["game_id"]), headers=self.helix_header)
+                        game_title = game_req.json()["data"][0]["name"]
+                        game_box_art_url = game_req.json()["data"][0]["box_art_url"].replace(
+                            r"{width}x{height}", "70x93")
+                        Game.objects.update_or_create(
+                            game_id=valid_dict["game_id"],
+                            defaults={
+                                "name": game_title,
+                                "box_art_url": game_box_art_url
+                            }
+                        )
 
             try:
                 cursor = clips["pagination"]["cursor"]
@@ -136,13 +140,16 @@ class Command(BaseCommand):
         for game in Game.objects.all():
             game_req = requests.get(
                 "https://api.twitch.tv/helix/games?id={}".format(game.game_id), headers=self.helix_header)
-            game_title = game_req.json()["data"][0]["name"]
-            game_box_art_url = game_req.json()["data"][0]["box_art_url"].replace(
-                r"{width}x{height}", "70x93")
-            Game.objects.update_or_create(
-                game_id=game.game_id,
-                defaults={
-                    "name": game_title,
-                    "box_art_url": game_box_art_url
-                }
-            )
+            try:
+                game_title = game_req.json()["data"][0]["name"]
+                game_box_art_url = game_req.json()["data"][0]["box_art_url"].replace(
+                    r"{width}x{height}", "70x93")
+                Game.objects.update_or_create(
+                    game_id=game.game_id,
+                    defaults={
+                        "name": game_title,
+                        "box_art_url": game_box_art_url
+                    }
+                )
+            except IndexError:
+                print(game.name, "got deleted on Twitch")
