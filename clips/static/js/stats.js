@@ -6,6 +6,15 @@ function clips_in_month(data) {
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: data,
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
     });
 };
 
