@@ -25,7 +25,9 @@
 
         <nav>
             <ul class="pagination m-5 justify-content-center">
-
+                <li class="page-item">
+                    <a class="page-link text-white" href="?page=1">&lt;&lt;</a>
+                </li>
                 {% if page_obj.has_previous %}
                 <li class="page-item">
                     <a class="page-link text-white" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
@@ -35,7 +37,6 @@
                     <a class="page-link text-white" href="#">&lt;</a>
                 </li>
                 {% endif %}
-
                 {% for i in page_obj.paginator.page_range %}
                 {% if i <= page_obj.number|add:5 and i >= page_obj.number|add:-5 %}
                 {% if page_obj.number == i %}
@@ -49,17 +50,18 @@
                 {% endif %}
                 {% endif %}
                 {% endfor %}
-
                 {% if page_obj.has_next %}
                 <li class="page-item">
                     <a class="page-link text-white" href="?page={{ page_obj.next_page_number }}">&gt;</a>
-
                 </li>
                 {% else %}
                 <li class="page-item disabled">
                     <a class="page-link text-white" href="#">&gt;</a>
                 </li>
                 {% endif %}
+                <li class="page-item">
+                    <a class="page-link text-white" href="?page={{ page_obj.paginator.num_pages }}">&gt;&gt;</a>
+                </li>
             </ul>
         </nav>
     </div>
