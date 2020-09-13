@@ -28,10 +28,10 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="GET">
-            <input class="form-control mr-sm-2 col-3" type="search" placeholder="Search" aria-label="Search"
-                name="search" value="{{ searchquery }}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"
+                value="{{ searchquery }}">
             <label for="game" class="mr-2">Game:</label>
-            <select name="game" id="game" class="form-control mr-sm-2 col-3">
+            <select name="game" id="game" class="form-control mr-sm-2">
                 <option selected>All</option>
                 {% for game in games %}
                 {% if game.name == searchgame %}
@@ -42,15 +42,14 @@
                 {% endfor %}
             </select>
             <label for="sort" class="mr-2">Sort by:</label>
-            <select name="sort" id="sort" class="form-control mr-sm-2 my-lg-0 col-3">
+            <select name="sort" id="sort" class="form-control mr-sm-2 my-lg-0">
                 {% for option in sort_options %}
                 <option>{{ option }}</option>
                 {% endfor %}
             </select>
-            <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-light my-2 my-sm-0" type="submit" id="btnSearch">Search</button>
         </form>
     </div>
-
 </nav>
 
 {% endblock %}
