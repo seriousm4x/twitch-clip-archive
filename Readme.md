@@ -117,5 +117,6 @@ I've created a cronjob which does this automatically every hour.
 
 # Todo
 
-* Better css. My css is horible
-* Dark mode toggle
+* Docker container
+* Dark/Light toggle
+* Maybe change to a "youtube-like" grid without cards and horizontal sliders?
