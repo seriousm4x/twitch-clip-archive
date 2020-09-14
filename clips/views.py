@@ -3,6 +3,7 @@ import json
 import os
 
 from dateutil import relativedelta
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.db.models import Count, Q, Sum
 from django.shortcuts import render
@@ -253,22 +254,37 @@ def statistics(request):
 def singleclip(request, clip_id):
     broadcaster_name = TwitchSettings.objects.all().get().broadcaster_name
     games = Game.objects.all()
-    clip_info = Clip.objects.filter(Q(clip_id__iexact=clip_id)).get()
-    recommended_clips = Clip.objects.filter(
-        Q(created_at__range=[
-            clip_info.created_at - relativedelta.relativedelta(days=5),
-            clip_info.created_at + relativedelta.relativedelta(weeks=2)
-        ])).exclude(clip_id__iexact=clip_id).order_by("-view_count")[:10]
 
-    matchGameToClip(clip_info)
-    matchGameToClip(recommended_clips)
+    try:
+        clip_info = Clip.objects.filter(Q(clip_id__iexact=clip_id)).get()
+        recommended_clips = Clip.objects.filter(
+            Q(created_at__range=[
+                clip_info.created_at - relativedelta.relativedelta(days=5),
+                clip_info.created_at + relativedelta.relativedelta(weeks=2)
+            ])).exclude(clip_id__iexact=clip_id).order_by("-view_count")[:10]
+        matchGameToClip(clip_info)
+        matchGameToClip(recommended_clips)
+        context = {
+            "broadcaster_name": broadcaster_name,
+            "clip": clip_info,
+            "recommended": recommended_clips,
+            "games": games,
+            "sort_options": globalConf().sort_options
+        }
+    except ObjectDoesNotExist:
+        clip_info = None
+        last_week = datetime.datetime.now(
+            tz=timezone.get_current_timezone()) - datetime.timedelta(weeks=1)
+        recommended_clips = Clip.objects.filter(
+            created_at__gte=last_week).order_by("-view_count")
+        matchGameToClip(recommended_clips)
+        context = {
+            "broadcaster_name": broadcaster_name,
+            "headline": "Clip not found",
+            "clip": clip_info,
+            "recommended": recommended_clips,
+            "games": games,
+            "sort_options": globalConf().sort_options
+        }
 
-    context = {
-        "broadcaster_name": broadcaster_name,
-        "headline": clip_info.title,
-        "clip": clip_info,
-        "recommended": recommended_clips,
-        "games": games,
-        "sort_options": globalConf().sort_options
-    }
     return render(request, "clips/clip.html", context)

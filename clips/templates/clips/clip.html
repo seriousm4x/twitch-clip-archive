@@ -14,6 +14,7 @@
     <div class="container-fluid bg-dark text-white">
         <div class="row">
             <div class="col-xl-8 pt-sm-5 pl-sm-5 pb-sm-5">
+                {% if clip %}
                 {% if not clip.clip_archived %}
                 <img width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline" /> {% else %}
                 <video width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
@@ -39,6 +40,11 @@
                         </h2>
                     </div>
                 </div>
+                {% else %}
+                <h1 class="font-weight-bold">
+                    {{ headline }}
+                </h1>
+                {% endif %}
             </div>
             <div class="col-xl-4 pt-sm-5 pr-sm-5 pb-sm-5">
                 <h3 class="recommended-headline font-weight-bold mb-3">Recommended</h3>
