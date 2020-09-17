@@ -8,6 +8,7 @@ This project creates a complete off side backup of the clips of a Twitch streame
 <details open>
 <summary>Show me</summary>
 <br>
+
 Font page
 ![images/screenshot1.png](images/screenshot1.png)
 
