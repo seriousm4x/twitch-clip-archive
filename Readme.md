@@ -1,21 +1,25 @@
-
+![images/logo.svg](images/logo.svg)
 # Django-Twitch-Archive
 
 This project creates a complete off side backup of the clips of a Twitch streamer. Top clips on the start page per week/month/ever, search function, sorting and statistics. [A live demo can be seen here](https://clips.itssoley.de/).
 
-# Screenshots
+## Screenshots
 
-### Font page
+<details open>
+<summary>Show me</summary>
+<br>
+Font page
 ![images/screenshot1.png](images/screenshot1.png)
 
-### Single clip
+Single clip
 ![images/screenshot2.png](images/screenshot2.png)
 
-### Search
+Search
 ![images/screenshot3.png](images/screenshot3.png)
 
-### Statistics
+Statistics
 ![images/screenshot4.png](images/screenshot4.png)
+</details>
 
 # Installation
 
