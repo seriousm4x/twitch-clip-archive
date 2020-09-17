@@ -1,0 +1,35 @@
+version: "3"
+services:
+  web:
+    container_name: dta-web
+    build: .
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - /var/www/clips-dev.itssoley.de/static:/static
+      - /var/www/clips-dev.itssoley.de/media:/media
+    env_file:
+      - .env
+    networks:
+      - dta_net
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:${DB_PORT}", "--", "./run.sh"]
+  db:
+    container_name: dta-db
+    image: postgres
+    restart: always
+    environment:
+      - "POSTGRES_USER=${DB_USER}"
+      - "POSTGRES_PASSWORD=${DB_PASSWORD}"
+      - "POSTGRES_DB=${DB_NAME}"
+    volumes:
+      - dta_db:/var/lib/postgresql/data
+    networks:
+      - dta_net
+
+volumes:
+  dta_db:
+networks:
+  dta_net:

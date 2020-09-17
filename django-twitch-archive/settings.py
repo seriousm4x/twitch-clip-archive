@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,17 +21,13 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-env = environ.Env()
-env.read_env(os.path.join(BASE_DIR, ".env"))
-
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
+DEBUG = os.getenv('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = list(env("ALLOWED_HOSTS").split(","))
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
 
 
 # Application definition
@@ -84,9 +79,14 @@ WSGI_APPLICATION = 'django-twitch-archive.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
+        "OPTIONS": {"connect_timeout": 5},
     }
 }
 
@@ -112,9 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = env("LANGUAGE_CODE")
+LANGUAGE_CODE = os.getenv("DJANGO_LANGUAGE_CODE")
 
-TIME_ZONE = env("TIME_ZONE")
+TIME_ZONE = os.getenv("DJANGO_TIME_ZONE")
 
 USE_I18N = True
 
@@ -130,7 +130,7 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 STATIC_URL = "/static/"
-STATIC_ROOT = env('STATIC_ROOT')
+STATIC_ROOT = "/static/"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = env('MEDIA_ROOT')
+MEDIA_ROOT = "/media/"

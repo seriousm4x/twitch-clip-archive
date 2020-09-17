@@ -2,7 +2,6 @@ import os
 import shutil
 from pathlib import Path
 
-import environ
 import requests
 import youtube_dl
 from django.conf import settings
@@ -33,12 +32,8 @@ class Command(BaseCommand):
     def __init__(self):
         self.all_clips = Clip.objects.all()
 
-        # read .env
-        env = environ.Env()
-        env.read_env(os.path.join(settings.BASE_DIR, ".env"))
-
         # set download path for clips and thumbnails
-        self.download_path = Path(env("MEDIA_ROOT"))
+        self.download_path = Path(settings.MEDIA_ROOT)
         self.clips_path = os.path.join(self.download_path, "clips")
         self.clip_thumbnails_path = os.path.join(
             self.download_path, "clip_thumbnails")
