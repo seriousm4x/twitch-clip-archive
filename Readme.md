@@ -3,9 +3,9 @@
 
 This project creates a complete off side backup of the clips of a Twitch streamer. Top clips on the start page per week/month/ever, search function, sorting and statistics. [A live demo can be seen here](https://clips.itssoley.de/).
 
-## Screenshots
+# Screenshots
 
-<details open>
+<details>
 <summary>Show me</summary>
 <br>
 
