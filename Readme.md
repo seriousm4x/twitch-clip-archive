@@ -1,7 +1,12 @@
-![images/logo.svg](images/logo.svg)
-# Django-Twitch-Archive
+<p align="center">
+    <img src="images/logo.svg" align="center" alt="Django-Twitch-Archive
+    " width="200"/>
+    <p align="center">
+        <strong>Django-Twitch-Archive</strong>
+    </p>
+</P>
 
-This project creates a complete off side backup of the clips of a Twitch streamer. Top clips on the start page per week/month/ever, search function, sorting and statistics. [A live demo can be seen here](https://clips.itssoley.de/).
+This project creates a complete off side backup of the clips of a Twitch streamer. Top clips on the start page per week/month/ever, search function, sorting and statistics. A [live demo](https://clips.itssoley.de/) can be seen here.
 
 # Screenshots
 
@@ -47,11 +52,11 @@ If you deploy for production, you shouldn't use the default django key in your .
 docker exec -it dta-web python manage.py shell -c 'from django.core.management import utils; print(utils.get_random_secret_key())'
 ```
 
-Edit and paste the generated key in your .env file under "SECRET_KEY".
+Edit and paste the generated key in your .env file under DJANGO_SECRET_KEY.
 
-Also set DEBUG=False and enter your domain under ALLOWED_HOSTS.
+Also set DJANGO_DEBUG=False and enter your domain under DJANGO_ALLOWED_HOSTS.
 
-## Caddy Server config
+## Caddy Server config for reverse proxy
 
 ```
 yourdomain.com {
