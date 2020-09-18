@@ -138,7 +138,7 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/static/"
+STATIC_ROOT = "/var/www/static/"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = "/media/"
+MEDIA_ROOT = "/var/www/media/"

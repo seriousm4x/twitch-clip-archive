@@ -7,8 +7,8 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - /var/www/static:/static
-      - /var/www/media:/media
+      - ${WEB_STATIC}:/var/www/static/
+      - ${WEB_MEDIA}:/var/www/media/
     env_file:
       - .env
     networks:
