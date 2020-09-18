@@ -2,7 +2,7 @@
 
 # Wait for postgresql
 if [ "$USE_POSTPRESQL" == "True" ]; then
-    wait-for-it.sh db:"${DB_PORT}"
+    /usr/bin/env bash ./wait-for-it.sh db:"${DB_PORT}"
 fi
 
 # DB migration
