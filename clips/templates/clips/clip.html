@@ -16,8 +16,8 @@
             <div class="col-xl-8 pt-sm-5 pl-sm-5 pb-sm-5">
                 {% if clip %}
                 {% if not clip.clip_archived %}
-                <img width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline" /> {% else %}
-                <video width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
+                <img width="100%" height="auto" class="rounded" src="{% static 'svg/clip-offline.svg' %}" alt="offline" /> {% else %}
+                <video width="100%" height="auto" class="rounded" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
                     controls>
                     <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
                 </video> {% endif %}
