@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Wait for postgresql
+if [ "$USE_POSTPRESQL" == "True" ]; then
+    wait-for-it.sh db:"${DB_PORT}"
+fi
+
 # DB migration
 python manage.py makemigrations
 python manage.py migrate
@@ -18,6 +23,14 @@ python manage.py shell -c "from clips.models import TwitchSettings; TwitchSettin
 
 # Run server
 gunicorn django-twitch-archive.wsgi:application --bind 0.0.0.0:8000 --workers $(($(nproc) + 1)) &
+env_hosts=("${DJANGO_ALLOWED_HOSTS//,/ }")
+
+printf "\n\n"
+printf "Listening on:\n"
+for address in ${env_hosts}; do 
+    echo "${address}":"${WEB_PORT}"
+done
+printf "\n\n"
 
 # Download from twitch
 while :; do
