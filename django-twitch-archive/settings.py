@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'django-twitch-archive.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if os.environ.get('USE_POSTPRESQL') == "True":
+if os.environ.get('USE_POSTGRESQL') == "True":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
