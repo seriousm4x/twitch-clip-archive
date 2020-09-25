@@ -1,58 +1,58 @@
 {% load static %}
 {% block content %}
 
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'index' %}">
-        {{ broadcaster_name }}
-        <img src="{% static 'svg/logo.svg' %}" alt="Logo" width="30" height="30" class="ml-2">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'index' %}">
+            <img src="{% static 'svg/logo.svg' %}" width="28" height="28">
+        </a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">
+                Home
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
                     Top
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'topweek' %}">Week</a>
-                    <a class="dropdown-item" href="{% url 'topmonth' %}">Month</a>
-                    <a class="dropdown-item" href="{% url 'topalltime' %}">All time</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item">
+                        Week
+                    </a>
+                    <a class="navbar-item">
+                        Month
+                    </a>
+                    <a class="navbar-item">
+                        All Time
+                    </a>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'statistics' %}">Stats</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="GET">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"
-                value="{{ searchquery }}">
-            <label for="game" class="mr-2">Game:</label>
-            <select name="game" id="game" class="form-control mr-sm-2">
-                <option selected>All</option>
-                {% for game in games %}
-                {% if game.name == searchgame %}
-                <option selected>{{ game.name }}</option>
-                {% else %}
-                <option>{{ game.name }}</option>
-                {% endif %}
-                {% endfor %}
-            </select>
-            <label for="sort" class="mr-2">Sort by:</label>
-            <select name="sort" id="sort" class="form-control mr-sm-2 my-lg-0">
-                {% for option in sort_options %}
-                <option>{{ option }}</option>
-                {% endfor %}
-            </select>
-            <button class="btn btn-light my-2 my-sm-0" type="submit" id="btnSearch">Search</button>
-        </form>
+            </div>
+            <a class="navbar-item">
+                Stats
+            </a>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="field has-addons">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Find a repository">
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary" id="btnSearch">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 
