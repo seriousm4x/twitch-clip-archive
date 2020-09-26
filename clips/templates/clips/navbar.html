@@ -1,10 +1,11 @@
 {% load static %}
 {% block content %}
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="{% url 'index' %}">
-            <img src="{% static 'svg/logo.svg' %}" width="28" height="28">
+            <span class="is-size-4">{{ broadcaster_name }}</span>
+            <img src="{% static 'svg/logo.svg' %}" width="28" height="28" class="ml-2">
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -17,40 +18,42 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item">
-                Home
+            <a class="navbar-item" href="{% url 'index' %}">
+                <i class="fas fa-home has-text-primary mr-1"></i> Home
             </a>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
-                    Top
+                    <i class="fas fa-chart-line has-text-info mr-1"></i> Top
                 </a>
                 <div class="navbar-dropdown">
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="{% url 'topweek' %}">
                         Week
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="{% url 'topmonth' %}">
                         Month
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="{% url 'topalltime' %}">
                         All Time
                     </a>
                 </div>
             </div>
-            <a class="navbar-item">
-                Stats
+            <a class="navbar-item" href="{% url 'statistics' %}">
+                <i class="fas fa-chart-pie has-text-warning mr-1"></i> Stats
             </a>
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <div class="field has-addons">
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Find a repository">
+                <form action="{% url 'search_results' %}">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input class="input" type="text" name="search" value="{{ searchquery }}" placeholder="Search clips">
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary" type="submit" onclick="this.classList.toggle('is-loading')">Go</button>
+                        </div>
                     </div>
-                    <div class="control">
-                        <button class="button is-primary" id="btnSearch">Submit</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

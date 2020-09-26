@@ -5,79 +5,110 @@
 
 {% include 'clips/header.html' %}
 
-<body class="bg-dark text-white">
+<body>
 
     {% include 'clips/navbar.html' %}
 
-    <div class="container-fluid bg-dark text-white">
-
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">{{ headline_top_week }}
-            <a href="{% url 'topweek' %}" class="badge badge-pill badge-dark">Show more</a>
+    <div class="container is-fluid">
+        <h1 class="title is-spaced my-6">{{ headline_top_week }}
+            <a class="tag is-primary" href="{% url 'topweek' %}">Show more</a>
         </h1>
-
-        <div class="grid-featured dragscroll p-sm-4">
-            {% if clips_top_week %}
-            {% for clip in clips_top_week %}
-
-            {% include 'clips/card.html' %}
-
-            {% endfor %}
-
-            <div class="w-100 m-auto text-center">
-                <h1>
-                    <a href="{% url 'topweek' %}" class="badge badge-pill badge-dark">Show more</a>
-                </h1>
+        <div>
+            <div class="columns is-multiline">
+                {% if clips_top_week %}
+                {% for clip in clips_top_week %}
+                {% if forloop.counter <= 3 %}
+                <div class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% elif forloop.counter <= 4  %}
+                <div
+                    class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-mobile">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% elif forloop.counter <= 6  %}
+                <div
+                    class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-touch is-hidden-desktop-only">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% else %}
+                <div
+                    class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-touch is-hidden-desktop-only is-hidden-widescreen-only">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <p>No clips found.</p>
+                {% endif %}
             </div>
-
-            {% else %}
-            <p>No clips found.</p>
-            {% endif %}
         </div>
-
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">{{ headline_top_month }}
-            <a href="{% url 'topmonth' %}" class="badge badge-pill badge-dark">Show more</a>
+        <h1 class="title is-spaced my-6">{{ headline_top_month }}
+            <a class="tag is-primary" href="{% url 'topmonth' %}">Show more</a>
         </h1>
-
-        <div class="grid-featured dragscroll p-sm-4">
-            {% if clips_top_month %}
-            {% for clip in clips_top_month %}
-            {% include 'clips/card.html' %}
-            {% endfor %}
-
-            <div class="w-100 m-auto text-center">
-                <h1>
-                    <a href="{% url 'topmonth' %}" class="badge badge-pill badge-dark">Show more</a>
-                </h1>
+        <div>
+            <div class="columns is-multiline">
+                {% if clips_top_month %}
+                {% for clip in clips_top_month %}
+                {% if forloop.counter <= 3 %}
+                <div class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% elif forloop.counter <= 4  %}
+                <div
+                    class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-mobile">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% elif forloop.counter <= 6  %}
+                <div
+                    class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-touch is-hidden-desktop-only">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% else %}
+                <div
+                    class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-touch is-hidden-desktop-only is-hidden-widescreen-only">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <p>No clips found.</p>
+                {% endif %}
             </div>
-
-            {% else %}
-            <p>No clips found.</p>
-            {% endif %}
         </div>
-
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">{{ headline_top_alltime }}
-            <a href="{% url 'topalltime' %}" class="badge badge-pill badge-dark">Show more</a>
+        <h1 class="title is-spaced my-6">{{ headline_top_alltime }}
+            <a class="tag is-primary" href="{% url 'topalltime' %}">Show more</a>
         </h1>
-
-        <div class="grid-featured dragscroll p-sm-4">
+        <div class="columns is-multiline">
             {% if clips_top_alltime %}
             {% for clip in clips_top_alltime %}
-            {% include 'clips/card.html' %}
-            {% endfor %}
-            <div class="w-100 m-auto text-center">
-                <h1>
-                    <a href="{% url 'topalltime' %}" class="badge badge-pill badge-dark">Show more</a>
-                </h1>
+            {% if forloop.counter <= 3 %}
+            <div class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet">
+                {% include 'clips/card.html' %}
             </div>
+            {% elif forloop.counter <= 4  %}
+            <div
+                class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-mobile">
+                {% include 'clips/card.html' %}
+            </div>
+            {% elif forloop.counter <= 6  %}
+            <div
+                class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-touch is-hidden-desktop-only">
+                {% include 'clips/card.html' %}
+            </div>
+            {% else %}
+            <div
+                class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet is-hidden-touch is-hidden-desktop-only is-hidden-widescreen-only">
+                {% include 'clips/card.html' %}
+            </div>
+            {% endif %}
+            {% endfor %}
             {% else %}
             <p>No clips found.</p>
             {% endif %}
         </div>
-
     </div>
-
     {% include 'clips/footer.html' %}
-
 </body>
 
 </html>

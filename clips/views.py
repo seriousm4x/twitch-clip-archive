@@ -147,6 +147,8 @@ def search(request):
 
     if searchgame == "All":
         searchgame = ""
+    elif not searchgame:
+        searchgame = ""
 
     if searchgame:
         game_id = Game.objects.filter(name=searchgame).get().game_id
@@ -160,7 +162,7 @@ def search(request):
     if sort in globalConf().sort_options:
         object_list = object_list.order_by(globalConf().sort_options[sort])
     else:
-        sort = ""
+        sort = "Views descending"
         object_list = object_list.order_by("-view_count")
 
     matchGameToClip(object_list)
