@@ -26,18 +26,18 @@
                 </video> {% endif %}
                 <div>
                     <div>
-                        <span class="tag is-primary is-large">{{ clip.game_title }}</span>
-                        <span class="tag is-primary is-large">{{ clip.view_count|intcomma }}
+                        <span class="tag is-primary is-large my-1">{{ clip.game_title }}</span>
+                        <span class="tag is-primary is-large my-1">{{ clip.view_count|intcomma }}
                             Views</span>
-                        <span class="tag is-primary is-large">{{ clip.created_at }}</span>
-                        <a class="tag is-primary is-large" href="https://twitch.tv/{{ clip.creator_name }}"
+                        <span class="tag is-primary is-large my-1">{{ clip.created_at }}</span>
+                        <a class="tag is-primary is-large my-1" href="https://twitch.tv/{{ clip.creator_name }}"
                             target="_new">
                             {{ clip.creator_name }}
                         </a>
                         {% if clip.deleted_on_twitch %}
-                        <span class="tag is-primary is-danger">Deleted on Twitch</span>
+                        <span class="tag is-primary is-danger my-1">Deleted on Twitch</span>
                         {% else %}
-                        <a class="tag is-primary is-large" href="{{ clip.url }}" target="_new">
+                        <a class="tag is-primary is-large my-1" href="{{ clip.url }}" target="_new">
                             Clip on Twitch
                         </a>
                         {% endif %}
