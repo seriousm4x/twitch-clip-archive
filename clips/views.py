@@ -73,7 +73,7 @@ def topweek(request):
     matchGameToClip(clips_top_week)
 
     # Pageination
-    paginator = Paginator(clips_top_week, 30)
+    paginator = Paginator(clips_top_week, 28)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -100,7 +100,7 @@ def topmonth(request):
     matchGameToClip(clips_top_month)
 
     # Pageination
-    paginator = Paginator(clips_top_month, 30)
+    paginator = Paginator(clips_top_month, 28)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -123,7 +123,7 @@ def topalltime(request):
     matchGameToClip(clips_top_alltime)
 
     # Pageination
-    paginator = Paginator(clips_top_alltime, 30)
+    paginator = Paginator(clips_top_alltime, 28)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -168,7 +168,7 @@ def search(request):
     matchGameToClip(object_list)
 
     # Pageination
-    paginator = Paginator(object_list, 30)
+    paginator = Paginator(object_list, 28)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 

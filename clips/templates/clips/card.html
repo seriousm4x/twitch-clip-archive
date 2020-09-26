@@ -2,7 +2,6 @@
 {% load humanize %}
 {% block content %}
 
-
 <div class="card">
     <div class="card-image">
         <figure class="image">
@@ -15,32 +14,31 @@
             {% endif %}
         </figure>
     </div>
-    <div class="card-content">
-        <div class="media">
-            <div class="media-left">
-                <figure class="image is-48x48">
-                    <img src="{{ MEDIA_URL }}game_thumbnails/{{ clip.game_id }}.jpg" alt="{{ clip.game_title }}">
-                </figure>
-            </div>
-            <div class="media-content">
-                <p class="title is-4">
-                    {{ clip.title }}
-                </p>
-                <p class="subtitle is-6">
-                    {{ clip.created_at }}
-                </p>
+    <a class="has-text-primary" href="{% url 'singleclip' clip.clip_id %}">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-70x93">
+                        <img src="{{ MEDIA_URL }}game_thumbnails/{{ clip.game_id }}.jpg" alt="{{ clip.game_title }}">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">
+                        {{ clip.title }}
+                    </p>
+                    <p class="subtitle is-6">
+                        {{ clip.created_at }}
+                        <br>{{ clip.view_count|intcomma }} Views
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="content">
-            {{ clip.view_count|intcomma }} Views
-            <br>
-        </div>
-    </div>
+    </a>
     <footer class="card-footer">
-        <a class="card-footer-item">
+        <a class="card-footer-item" href="https://twitch.tv/{{ clip.creator_name }}" target="_new">
             {{ clip.creator_name }}
         </a>
-        <a href="{{ clip.url }}" target="_new" class="card-footer-item">
+        <a class="card-footer-item" href="{{ clip.url }}" target="_new">
             {% if clip.deleted_on_twitch %}
             <figure class="image is-24x24">
                 <img src="{% static 'svg/twitch-dead.svg' %}" alt="twitch-dead" />
@@ -53,6 +51,5 @@
         </a>
     </footer>
 </div>
-
 
 {% endblock %}

@@ -39,7 +39,17 @@
                 {% endif %}
                 {% endfor %}
                 {% else %}
-                <p>No clips found.</p>
+                <div class="column is-full">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title">
+                                    No clips found
+                                </h1>
+                            </div>
+                        </div>
+                    </section>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -72,7 +82,17 @@
                 {% endif %}
                 {% endfor %}
                 {% else %}
-                <p>No clips found.</p>
+                <div class="column is-full">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title">
+                                    No clips found
+                                </h1>
+                            </div>
+                        </div>
+                    </section>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -104,11 +124,23 @@
             {% endif %}
             {% endfor %}
             {% else %}
-            <p>No clips found.</p>
+            <div class="column is-full">
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container">
+                            <h1 class="title">
+                                No clips found
+                            </h1>
+                        </div>
+                    </div>
+                </section>
+            </div>
             {% endif %}
         </div>
     </div>
+
     {% include 'clips/footer.html' %}
+
 </body>
 
 </html>

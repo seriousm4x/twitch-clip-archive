@@ -1,67 +1,80 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 {% include 'clips/header.html' %}
 
-<body class="bg-dark text-white">
+<body>
 
-    {% include "clips/navbar.html" %}
+    {% include 'clips/navbar.html' %}
 
-    <div class="container-fluid bg-dark text-white">
-
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">{{ headline }}</h1>
-
-        <div class="grid p-sm-4">
-            {% if clips %}
-            {% for clip in page_obj %}
-            {% include "clips/card.html" %}
-            {% endfor %}
-            {% else %}
-            <p>No clips found.</p>
-            {% endif %}
-        </div>
-
-        <nav>
-            <ul class="pagination m-5 justify-content-center">
-                <li class="page-item">
-                    <a class="page-link text-white" href="?page=1">&lt;&lt;</a>
-                </li>
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link text-white" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-                </li>
+    <div class="container is-fluid">
+        <h1 class="title is-spaced my-6">
+            {{ headline }}
+        </h1>
+        <div>
+            <div class="columns is-multiline">
+                {% if clips %}
+                {% for clip in page_obj %}
+                <div class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% endfor %}
                 {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link text-white" href="#">&lt;</a>
+                <div class="column is-full">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title">
+                                    No clips found
+                                </h1>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <nav class="pagination is-centered my-6" role="navigation" aria-label="pagination">
+            <ul class="pagination-list">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a class="pagination-link" aria-label="Goto page 1" href="?page=1">1</a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
                 </li>
                 {% endif %}
                 {% for i in page_obj.paginator.page_range %}
-                {% if i <= page_obj.number|add:5 and i >= page_obj.number|add:-5 %}
+                {% if i <= page_obj.number|add:3 and i >= page_obj.number|add:-3 %}
                 {% if page_obj.number == i %}
-                <li class="page-item active">
-                    <a class="page-link text-white" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                <li>
+                    <a class="pagination-link is-current" aria-label="Page {{ forloop.counter }}" aria-current="page"
+                        href="?page={{ forloop.counter }}">
+                        {{ forloop.counter }}
+                    </a>
                 </li>
                 {% else %}
-                <li class="page-item">
-                    <a class="page-link text-white" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                <li>
+                    <a class="pagination-link" aria-label="Page {{ forloop.counter }}" aria-current="page"
+                        href="?page={{ forloop.counter }}">
+                        {{ forloop.counter }}
+                    </a>
                 </li>
                 {% endif %}
                 {% endif %}
                 {% endfor %}
                 {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link text-white" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
                 </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link text-white" href="#">&gt;</a>
+                <li>
+                    <a class="pagination-link" aria-label="Goto page {{ page_obj.paginator.num_pages }}"
+                        href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}
+                    </a>
                 </li>
                 {% endif %}
-                <li class="page-item">
-                    <a class="page-link text-white" href="?page={{ page_obj.paginator.num_pages }}">&gt;&gt;</a>
-                </li>
             </ul>
         </nav>
     </div>

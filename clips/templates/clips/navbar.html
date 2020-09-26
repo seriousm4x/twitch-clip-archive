@@ -21,7 +21,7 @@
             <a class="navbar-item" href="{% url 'index' %}">
                 <i class="fas fa-home has-text-primary mr-1"></i> Home
             </a>
-            <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-item has-dropdown" onclick="this.classList.toggle('is-active')">
                 <a class="navbar-link">
                     <i class="fas fa-chart-line has-text-info mr-1"></i> Top
                 </a>
@@ -47,10 +47,12 @@
                 <form action="{% url 'search_results' %}">
                     <div class="field has-addons">
                         <div class="control">
-                            <input class="input" type="text" name="search" value="{{ searchquery }}" placeholder="Search clips">
+                            <input class="input" type="text" name="search" value="{{ searchquery }}"
+                                placeholder="Search clips">
                         </div>
                         <div class="control">
-                            <button class="button is-primary" type="submit" onclick="this.classList.toggle('is-loading')">Go</button>
+                            <button class="button is-primary" type="submit"
+                                onclick="this.classList.toggle('is-loading')">Go</button>
                         </div>
                     </div>
                 </form>
