@@ -1,58 +1,65 @@
 {% load static %}
 {% block content %}
 
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'index' %}">
-        {{ broadcaster_name }}
-        <img src="{% static 'svg/logo.svg' %}" alt="Logo" width="30" height="30" class="ml-2">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'index' %}">
+            <span class="is-size-4">{{ broadcaster_name }}</span>
+            <img src="{% static 'svg/logo.svg' %}" width="28" height="28" class="ml-2" alt="Logo">
+        </a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Top
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="{% url 'index' %}">
+                <i class="fas fa-home has-text-primary mr-1"></i> Home
+            </a>
+            <div class="navbar-item has-dropdown" onclick="this.classList.toggle('is-active')">
+                <a class="navbar-link">
+                    <i class="fas fa-chart-line has-text-info mr-1"></i> Top
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'topweek' %}">Week</a>
-                    <a class="dropdown-item" href="{% url 'topmonth' %}">Month</a>
-                    <a class="dropdown-item" href="{% url 'topalltime' %}">All time</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{% url 'topweek' %}">
+                        Week
+                    </a>
+                    <a class="navbar-item" href="{% url 'topmonth' %}">
+                        Month
+                    </a>
+                    <a class="navbar-item" href="{% url 'topalltime' %}">
+                        All Time
+                    </a>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'statistics' %}">Stats</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="GET">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"
-                value="{{ searchquery }}">
-            <label for="game" class="mr-2">Game:</label>
-            <select name="game" id="game" class="form-control mr-sm-2">
-                <option selected>All</option>
-                {% for game in games %}
-                {% if game.name == searchgame %}
-                <option selected>{{ game.name }}</option>
-                {% else %}
-                <option>{{ game.name }}</option>
-                {% endif %}
-                {% endfor %}
-            </select>
-            <label for="sort" class="mr-2">Sort by:</label>
-            <select name="sort" id="sort" class="form-control mr-sm-2 my-lg-0">
-                {% for option in sort_options %}
-                <option>{{ option }}</option>
-                {% endfor %}
-            </select>
-            <button class="btn btn-light my-2 my-sm-0" type="submit" id="btnSearch">Search</button>
-        </form>
+            </div>
+            <a class="navbar-item" href="{% url 'statistics' %}">
+                <i class="fas fa-chart-pie has-text-warning mr-1"></i> Stats
+            </a>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <form action="{% url 'search_results' %}">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input class="input" type="text" name="search" value="{{ searchquery }}"
+                                placeholder="Search clips">
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary" type="submit" aria-label="search clips"
+                                onclick="this.classList.toggle('is-loading')">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </nav>
 

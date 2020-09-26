@@ -6,77 +6,75 @@
 
 {% include 'clips/header.html' %}
 
-<body class="bg-dark text-white">
+<body>
 
     {% include "clips/navbar.html" %}
 
-    <div class="container-fluid bg-dark text-white">
-
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">{{ headline }}</h1>
-
-        <div class="container-fluid mb-5">
-            <div class="row">
-                <div class="col-lg-6 mt-5">
-                    <h2 class="font-weight-bold">Most clips per user</h2>
-                    <table class="table table-striped table-dark table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Total clips</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in most_clips_by_user %}
-                            <tr>
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>{{ user.creator_name}}</td>
-                                <td>{{ user.amount|intcomma }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-lg-6 mt-5">
-                    <h2 class="font-weight-bold">Most views per user</h2>
-                    <table class="table table-striped table-dark table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Total views</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in most_views_by_user %}
-                            <tr>
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>{{ user.creator_name}}</td>
-                                <td>{{ user.amount|intcomma }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+    <div class="container is-fluid">
+        <h1 class="title is-spaced my-6">
+            {{ headline }}
+        </h1>
+        <div class="columns">
+            <div class="column">
+                <h2 class="title">Most clips per user</h2>
+                <table class="table is-fullwidth is-striped is-hoverable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Total clips</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in most_clips_by_user %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ user.creator_name}}</td>
+                            <td>{{ user.amount|intcomma }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            <div class="row">
-                <div class="col-lg-6 mt-5">
-                    <h2 class="font-weight-bold">Clips per month</h2>
-                    <canvas id="clips_in_month" height="200"></canvas>
-                </div>
-                <div class="col-lg-6 mt-5">
-                    <h2 class="font-weight-bold">Clips per category</h2>
-                    <canvas id="clips_by_category" height="200"></canvas>
-                </div>
+            <div class="column">
+                <h2 class="title">Most views per user</h2>
+                <table class="table is-fullwidth is-striped is-hoverable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Total views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in most_views_by_user %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ user.creator_name}}</td>
+                            <td>{{ user.amount|intcomma }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div class="columns">
+            <div class="column is-half">
+                <h2 class="title">Clips per month</h2>
+                <canvas id="clips_in_month" height="200"></canvas>
+            </div>
+            <div class="column is-half">
+                <h2 class="title">Clips per category</h2>
+                <canvas id="clips_by_category" height="200"></canvas>
+            </div>
+        </div>
+    </div>
 
     </div>
 
     {% include 'clips/footer.html' %}
 
     <footer>
-
         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/chartjs-plugin-colorschemes.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/stats.js' %}"></script>
@@ -84,7 +82,6 @@
             clips_in_month(JSON.parse("{{ clips_in_month|escapejs }}"))
             clips_by_category(JSON.parse("{{ clips_by_category|escapejs }}"))
         </script>
-
     </footer>
 
 </body>

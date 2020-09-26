@@ -1,84 +1,125 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 {% include 'clips/header.html' %}
 
-<body class="bg-dark text-white">
+<body>
 
-    {% include "clips/navbar.html" %}
+    {% include 'clips/navbar.html' %}
 
-    <div class="container-fluid bg-dark text-white">
-
-        <h1 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">{{ headline }}</h1>
-        <h2 class="page-title font-weight-bold mt-5 mb-5 ml-sm-5">
-            {% if results == 1 %}
-            Found {{ results }} clip
-            {% else %}
-            Found {{ results }} clips
-            {% endif %}
+    <div class="container is-fluid">
+        <h1 class="title is-spaced my-6">
+            {{ headline }} ({{ results }})
             {% if request.GET.search %}
             for "{{ request.GET.search }}"
             {% endif %}
             {% if request.GET.game %}
             in "{{ request.GET.game }}"
             {% endif %}
-        </h2>
-
-        <div class="grid p-sm-4">
-            {% if clips %}
-            {% for clip in page_obj %}
-            {% include "clips/card.html" %}
-            {% endfor %}
-            {% else %}
-            <p>No clips found.</p>
-            {% endif %}
+        </h1>
+        <div class="columns is-multiline">
+            <div class="column">
+                <form action="{% url 'search_results' %}">
+                    <div class="select my-3">
+                        <select name="game">
+                            <option selected>All</option>
+                            {% for game in games %}
+                            {% if game.name == searchgame %}
+                            <option selected>{{ game.name }}</option>
+                            {% else %}
+                            <option>{{ game.name }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="select my-3">
+                        <select name="sort">
+                            {% for option in sort_options %}
+                            {% if option == sort %}
+                            <option selected>{{ option }}</option>
+                            {% else %}
+                            <option>{{ option }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="control is-hidden">
+                        <input class="input" type="text" placeholder="Text input" name="search"
+                            value="{{ searchquery }}">
+                    </div>
+                    <button class="button is-primary my-3" type="submit" aria-label="sort clips"
+                        onclick="this.classList.toggle('is-loading')">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                </form>
+            </div>
         </div>
-
-        <nav>
-            <ul class="pagination m-5 justify-content-center">
-                <li class="page-item">
-                    <a class="page-link text-white" href="?{{ query }}&page=1">&lt;&lt;</a>
-                </li>
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link text-white" href="{{ query }}&page={{ page_obj.previous_page_number }}">&lt;</a>
-                </li>
+        <div>
+            <div class="columns is-multiline">
+                {% if clips %}
+                {% for clip in page_obj %}
+                <div class="column is-one-quarter-fullhd is-one-third-widescreen is-half-desktop is-half-tablet">
+                    {% include 'clips/card.html' %}
+                </div>
+                {% endfor %}
                 {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link text-white" href="#">&lt;</a>
+                <div class="column is-full">
+                    <section class="hero is-danger">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title">
+                                    No clips found
+                                </h1>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <nav class="pagination is-centered my-6" role="navigation" aria-label="pagination">
+            <ul class="pagination-list">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a class="pagination-link" aria-label="Goto page 1" href="{{ query }}&page=1">1</a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
                 </li>
                 {% endif %}
                 {% for i in page_obj.paginator.page_range %}
-                {% if i <= page_obj.number|add:5 and i >= page_obj.number|add:-5 %}
+                {% if i <= page_obj.number|add:3 and i >= page_obj.number|add:-3 %}
                 {% if page_obj.number == i %}
-                <li class="page-item active">
-                    <a class="page-link text-white" href="{{ query }}&page={{ i }}">{{ i }}</a>
+                <li>
+                    <a class="pagination-link is-current" aria-label="Page {{ forloop.counter }}" aria-current="page"
+                        href="{{ query }}&page={{ forloop.counter }}">
+                        {{ forloop.counter }}
+                    </a>
                 </li>
                 {% else %}
-                <li class="page-item">
-                    <a class="page-link text-white" href="{{ query }}&page={{ i }}">{{ i }}</a>
+                <li>
+                    <a class="pagination-link" aria-label="Page {{ forloop.counter }}" aria-current="page"
+                        href="{{ query }}&page={{ forloop.counter }}">
+                        {{ forloop.counter }}
+                    </a>
                 </li>
                 {% endif %}
                 {% endif %}
                 {% endfor %}
                 {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link text-white" href="{{ query }}&page={{ page_obj.next_page_number }}">&gt;</a>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
                 </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link text-white" href="#">&gt;</a>
+                <li>
+                    <a class="pagination-link" aria-label="Goto page {{ page_obj.paginator.num_pages }}"
+                        href="{{ query }}&page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}
+                    </a>
                 </li>
                 {% endif %}
-                <li class="page-item">
-                    <a class="page-link text-white"
-                        href="{{ query }}&page={{ page_obj.paginator.num_pages }}">&gt;&gt;</a>
-                </li>
             </ul>
         </nav>
-
     </div>
 
     {% include 'clips/footer.html' %}
