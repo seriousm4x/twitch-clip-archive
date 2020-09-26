@@ -5,7 +5,7 @@
     <div class="navbar-brand">
         <a class="navbar-item" href="{% url 'index' %}">
             <span class="is-size-4">{{ broadcaster_name }}</span>
-            <img src="{% static 'svg/logo.svg' %}" width="28" height="28" class="ml-2">
+            <img src="{% static 'svg/logo.svg' %}" width="28" height="28" class="ml-2" alt="Logo">
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -51,8 +51,10 @@
                                 placeholder="Search clips">
                         </div>
                         <div class="control">
-                            <button class="button is-primary" type="submit"
-                                onclick="this.classList.toggle('is-loading')">Go</button>
+                            <button class="button is-primary" type="submit" aria-label="search clips"
+                                onclick="this.classList.toggle('is-loading')">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>

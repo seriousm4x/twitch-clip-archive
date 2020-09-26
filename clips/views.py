@@ -145,6 +145,9 @@ def search(request):
     searchgame = request.GET.get("game")
     sort = request.GET.get("sort")
 
+    if search == None:
+        search = ""
+
     if searchgame == "All":
         searchgame = ""
     elif not searchgame:
@@ -182,7 +185,8 @@ def search(request):
                "query": str("?sort=" + sort + "&game=" +
                             searchgame + "&search=" + search).replace(" ", "+"),
                "searchquery": search,
-               "searchgame": searchgame
+               "searchgame": searchgame,
+               "sort": sort
                }
 
     return render(request, "clips/search.html", context)
@@ -263,7 +267,7 @@ def singleclip(request, clip_id):
             Q(created_at__range=[
                 clip_info.created_at - relativedelta.relativedelta(days=5),
                 clip_info.created_at + relativedelta.relativedelta(weeks=2)
-            ])).exclude(clip_id__iexact=clip_id).order_by("-view_count")[:10]
+            ])).exclude(clip_id__iexact=clip_id).order_by("-view_count")[:8]
         matchGameToClip(clip_info)
         matchGameToClip(recommended_clips)
         context = {

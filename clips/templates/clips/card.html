@@ -24,7 +24,7 @@
                 </div>
                 <div class="media-content">
                     <p class="title is-4">
-                        {{ clip.title }}
+                        {{ clip.title|truncatechars:47 }}
                     </p>
                     <p class="subtitle is-6">
                         {{ clip.created_at }}
