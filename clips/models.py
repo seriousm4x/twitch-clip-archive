@@ -11,7 +11,7 @@ class Clip(models.Model):
     broadcaster_name = models.SlugField(max_length=30)
     creator_id = models.PositiveIntegerField()
     creator_name = models.SlugField(max_length=30)
-    game_id = models.PositiveIntegerField()
+    game_id = models.PositiveIntegerField(blank=True, null=True)
     language = models.CharField(max_length=6)
     title = models.CharField(max_length=150)
     view_count = models.PositiveIntegerField()
@@ -24,7 +24,7 @@ class Clip(models.Model):
 
 class Game(models.Model):
     box_art_url = models.URLField(max_length=150, default="0")
-    game_id = models.PositiveIntegerField()
+    game_id = models.PositiveIntegerField(blank=True, null=True)
     name = models.CharField(max_length=150)
 
 
