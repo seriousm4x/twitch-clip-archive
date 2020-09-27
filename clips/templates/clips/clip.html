@@ -44,9 +44,17 @@
                     </div>
                 </div>
                 {% else %}
-                <h1>
-                    {{ headline }}
-                </h1>
+                <div class="column is-full">
+                    <section class="hero is-danger">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title">
+                                    Clip not found
+                                </h1>
+                            </div>
+                        </div>
+                    </section>
+                </div>
                 {% endif %}
             </div>
             <div class="column is-one-thirds-desktop">

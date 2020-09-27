@@ -282,11 +282,10 @@ def singleclip(request, clip_id):
         last_week = datetime.datetime.now(
             tz=timezone.get_current_timezone()) - datetime.timedelta(weeks=1)
         recommended_clips = Clip.objects.filter(
-            created_at__gte=last_week).order_by("-view_count")
+            created_at__gte=last_week).order_by("-view_count")[:8]
         matchGameToClip(recommended_clips)
         context = {
             "broadcaster_name": broadcaster_name,
-            "headline": "Clip not found",
             "clip": clip_info,
             "recommended": recommended_clips,
             "games": games,
