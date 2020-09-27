@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Wait for postgresql
-if [ "$USE_POSTPRESQL" == "True" ]; then
+if [ "$USE_POSTGRESQL" == "True" ]; then
     /usr/bin/env bash ./wait-for-it.sh db:"${DB_PORT}"
 fi
 
@@ -16,7 +16,7 @@ if [ -f "datadump.json" ]; then
 fi
 
 # Create superuser if none exists
-python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_user('$DJANGO_SUPERUSER_USER', password='$DJANGO_SUPERUSER_PASSWORD') if not User.objects.filter(username='$DJANGO_SUPERUSER_USER').exists() else print('Django user exists')"
+python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('$DJANGO_SUPERUSER_USER', password='$DJANGO_SUPERUSER_PASSWORD') if not User.objects.filter(username='$DJANGO_SUPERUSER_USER').exists() else print('Django user exists')"
 
 # Create twitch settings if none exists
 python manage.py shell -c "from clips.models import TwitchSettings; TwitchSettings(broadcaster_name='$TWITCH_CHANNEL', client_id='$TWITCH_CLIENT_ID', client_secret='$TWITCH_CLIENT_SECRET').save() if TwitchSettings.objects.filter().count() == 0 else print('Twitch settings exists')"
