@@ -2,6 +2,11 @@
     height: 100%;
 }
 
+.unknown_game {
+    width: 70px !important;
+    height: 93px !important;
+}
+
 @media (prefers-color-scheme: dark) {
     .card {
         background-color: #1e1f25 !important;
