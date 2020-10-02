@@ -9,6 +9,7 @@ services:
     volumes:
       - ${WEB_STATIC}:/var/www/static/
       - ${WEB_MEDIA}:/var/www/media/
+      - ${DB_BACKUP_DIR}:${DB_BACKUP_DIR}
     env_file:
       - .env
     networks:
@@ -17,7 +18,7 @@ services:
       - db
   db:
     container_name: dta-db
-    image: postgres
+    image: postgres:13-alpine
     restart: always
     environment:
       - "POSTGRES_USER=${DB_USER}"
