@@ -6,7 +6,7 @@
     <div class="card-image">
         <figure class="image">
             {% if not clip.clip_archived %}
-            <img src="{% static 'svg/clip-offline.svg' %}" alt="offline">
+            <img src="{% static 'svg/clip-offline.svg' %}" loading="lazy" alt="offline">
             {% else %}
             <video poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg" controls>
                 <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
@@ -20,9 +20,11 @@
                 <div class="media-left">
                     <figure class="image">
                         {% if clip.game_id %}
-                        <img src="{{ MEDIA_URL }}game_thumbnails/{{ clip.game_id }}.jpg" alt="{{ clip.game_title }}">
+                        <img src="{{ MEDIA_URL }}game_thumbnails/{{ clip.game_id }}.jpg" loading="lazy"
+                            alt="{{ clip.game_title }}">
                         {% else %}
-                        <img class="unknown_game" src="{% static 'svg/unknown_game.svg' %}" alt="{{ clip.game_title }}">
+                        <img class="unknown_game" src="{% static 'svg/unknown_game.svg' %}" loading="lazy"
+                            alt="{{ clip.game_title }}">
                         {% endif %}
                     </figure>
                 </div>
@@ -45,11 +47,11 @@
         <a class="card-footer-item" href="{{ clip.url }}" target="_new">
             {% if clip.deleted_on_twitch %}
             <figure class="image is-24x24">
-                <img src="{% static 'svg/twitch-dead.svg' %}" alt="twitch-dead" />
+                <img src="{% static 'svg/twitch-dead.svg' %}" loading="lazy" alt="twitch-dead" />
             </figure>
             {% else %}
             <figure class="image is-24x24">
-                <img src="{% static 'svg/twitch.svg' %}" alt="twitch" />
+                <img src="{% static 'svg/twitch.svg' %}" loading="lazy" alt="twitch" />
             </figure>
             {% endif %}
         </a>

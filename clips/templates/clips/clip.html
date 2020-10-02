@@ -58,10 +58,11 @@
                     <div class="column">
                         <a href="{% url 'singleclip' clip.clip_id %}">
                             {% if not clip.clip_archived %}
-                            <img width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline">
+                            <img width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" loading="lazy"
+                                alt="offline">
                             {% else %}
                             <img width="100%" height="auto" src="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
-                                alt="{{ clip.title }}">
+                                loading="lazy" alt="{{ clip.title }}">
                             {% endif %}
                         </a>
                     </div>
