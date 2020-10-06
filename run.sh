@@ -37,7 +37,7 @@ while :; do
     python -u manage.py updateDB && \
     python -u manage.py download && \
     python -u manage.py collectstatic --noinput
-    if [ -z "$DB_BACKUP_DIR" ]; then
+    if [ -n "$DB_BACKUP_DIR" ]; then
         python -u manage.py dumpdata > ${DB_BACKUP_DIR}dump_$(date +%Y-%m-%d"_"%H_%M_%S).json
     fi
     sleep $(( 6 * 60 * 60 )) # 6 hours
