@@ -279,3 +279,7 @@ $RECYCLE.BIN/
 .vscode/
 datadump.json
 docker-compose-dev.yml
+
+# exclude django migrations
+clips/migrations/*
+!clips/migrations/__init__.py
