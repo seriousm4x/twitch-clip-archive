@@ -69,8 +69,3 @@ yourdomain.com {
     encode gzip
 }
 ```
-
-# Todo
-
-* Dark/Light toggle
-* Maybe change to a "youtube-like" grid without cards and horizontal sliders?
