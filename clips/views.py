@@ -155,7 +155,7 @@ def search(request):
             if searchgame == "All":
                 searchgame = ""
                 game_id = [
-                    i for i in Game.objects.filter().values_list("game_id", flat=True)
+                    i for i in Game.objects.values_list("game_id", flat=True)
                 ]
                 object_list = Clip.objects.filter(
                     Q(title__icontains=search) & Q(game_id__in=game_id) |
