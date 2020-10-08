@@ -42,6 +42,7 @@ def index(request):
         created_at__gte=last_month).order_by("-view_count")[:8]
     clips_top_alltime = Clip.objects.order_by("-view_count")[:8]
 
+    # look up games for clips
     matchGameToClip(clips_top_week)
     matchGameToClip(clips_top_month)
     matchGameToClip(clips_top_alltime)
@@ -70,6 +71,7 @@ def topweek(request):
     clips_top_week = Clip.objects.filter(
         created_at__gte=last_week).order_by("-view_count")
 
+    # look up games for clips
     matchGameToClip(clips_top_week)
 
     # Pageination
@@ -97,6 +99,7 @@ def topmonth(request):
     clips_top_month = Clip.objects.filter(
         created_at__gte=last_month).order_by("-view_count")
 
+    # look up games for clips
     matchGameToClip(clips_top_month)
 
     # Pageination
@@ -120,6 +123,7 @@ def topalltime(request):
     games = Game.objects.all()
     clips_top_alltime = Clip.objects.order_by("-view_count")
 
+    # look up games for clips
     matchGameToClip(clips_top_alltime)
 
     # Pageination
@@ -145,29 +149,50 @@ def search(request):
     searchgame = request.GET.get("game")
     sort = request.GET.get("sort")
 
-    if search == None:
-        search = ""
-
-    if searchgame == "All":
-        searchgame = ""
-    elif not searchgame:
-        searchgame = ""
-
-    if searchgame:
-        game_id = Game.objects.filter(name=searchgame).get().game_id
-        object_list = Clip.objects.filter(
-            Q(title__icontains=search) & Q(game_id__exact=game_id) | Q(creator_name__icontains=search) & Q(
-                game_id__exact=game_id) | Q(clip_id__icontains=search) & Q(game_id__exact=game_id))
+    # seach filter for clips
+    if search != "":
+        if searchgame:
+            if searchgame == "All":
+                searchgame = ""
+                game_id = [
+                    i for i in Game.objects.filter().values_list("game_id", flat=True)
+                ]
+                object_list = Clip.objects.filter(
+                    Q(title__icontains=search) & Q(game_id__in=game_id) |
+                    Q(creator_name__icontains=search) & Q(game_id__in=game_id) |
+                    Q(clip_id__icontains=search) & Q(game_id__in=game_id))
+            else:
+                game_id = Game.objects.filter(name=searchgame).get().game_id
+                object_list = Clip.objects.filter(
+                    Q(title__icontains=search) & Q(game_id__exact=game_id) |
+                    Q(creator_name__icontains=search) & Q(game_id__exact=game_id) |
+                    Q(clip_id__icontains=search) & Q(game_id__exact=game_id))
+        else:
+            searchgame = ""
+            object_list = Clip.objects.filter(
+                Q(title__icontains=search) |
+                Q(creator_name__icontains=search) |
+                Q(clip_id__icontains=search))
     else:
-        object_list = Clip.objects.filter(
-            Q(title__icontains=search) | Q(creator_name__icontains=search) | Q(clip_id__icontains=search))
+        search = ""
+        if searchgame:
+            if searchgame == "All":
+                searchgame = ""
+                object_list = Clip.objects.all()
+            else:
+                game_id = Game.objects.filter(name=searchgame).get().game_id
+                object_list = Clip.objects.filter(Q(game_id__exact=game_id))
+        else:
+            searchgame = ""
+            object_list = Clip.objects.all()
 
-    if sort in globalConf().sort_options:
+    if sort:
         object_list = object_list.order_by(globalConf().sort_options[sort])
     else:
         sort = "Views descending"
         object_list = object_list.order_by("-view_count")
 
+    # look up games for clips
     matchGameToClip(object_list)
 
     # Pageination
@@ -213,6 +238,7 @@ def statistics(request):
         }],
         "labels": []
     }
+
     for i in range(5, -1, -1):
         first_day_of_month = timezone.now().replace(
             day=1) - relativedelta.relativedelta(months=i)
@@ -233,6 +259,7 @@ def statistics(request):
         }],
         "labels": []
     }
+
     most_clips_by_category = Clip.objects.values("game_id").annotate(
         amount=Count("game_id")).order_by("-amount")[:10]
 
@@ -268,8 +295,11 @@ def singleclip(request, clip_id):
                 clip_info.created_at - relativedelta.relativedelta(days=5),
                 clip_info.created_at + relativedelta.relativedelta(weeks=2)
             ])).exclude(clip_id__iexact=clip_id).order_by("-view_count")[:8]
+
+        # look up games for clips
         matchGameToClip(clip_info)
         matchGameToClip(recommended_clips)
+
         context = {
             "broadcaster_name": broadcaster_name,
             "clip": clip_info,
@@ -283,7 +313,10 @@ def singleclip(request, clip_id):
             tz=timezone.get_current_timezone()) - datetime.timedelta(weeks=1)
         recommended_clips = Clip.objects.filter(
             created_at__gte=last_week).order_by("-view_count")[:8]
+
+        # look up games for clips
         matchGameToClip(recommended_clips)
+
         context = {
             "broadcaster_name": broadcaster_name,
             "clip": clip_info,
