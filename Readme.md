@@ -15,16 +15,16 @@ This project creates a complete off side backup of the clips of a Twitch streame
 <br>
 
 Font page
-![images/screenshot1.png](images/screenshot1.png)
+![images/home.png](images/home.png)
 
 Single clip
-![images/screenshot2.png](images/screenshot2.png)
+![images/clip.png](images/clip.png)
 
 Search
-![images/screenshot3.png](images/screenshot3.png)
+![images/search.png](images/search.png)
 
 Statistics
-![images/screenshot4.png](images/screenshot4.png)
+![images/stats.png](images/stats.png)
 </details>
 
 # Installation
