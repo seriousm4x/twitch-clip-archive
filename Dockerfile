@@ -5,7 +5,7 @@ RUN apk update && \
 
 WORKDIR /opt/app
 COPY . .
-RUN pip install -r requirements.txt
+RUN /usr/local/bin/python -m pip install --upgrade pip && pip install -r requirements.txt
 
 EXPOSE 8000
 ENTRYPOINT ["./run.sh"]
