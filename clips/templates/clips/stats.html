@@ -58,14 +58,18 @@
                 </table>
             </div>
         </div>
-        <div class="columns">
-            <div class="column is-half">
+        <div class="columns is-multiline">
+            <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
                 <h2 class="title">Clips per month</h2>
                 <canvas id="clips_in_month" width="100%" height="100%"></canvas>
             </div>
-            <div class="column is-half">
+            <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
                 <h2 class="title">Clips per category</h2>
                 <canvas id="clips_by_category" width="100%" height="100%"></canvas>
+            </div>
+            <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
+                <h2 class="title">Clips deleted on Twitch</h2>
+                <canvas id="clips_deleted" width="100%" height="100%"></canvas>
             </div>
         </div>
     </div>
@@ -81,6 +85,7 @@
         <script>
             clips_in_month(JSON.parse("{{ clips_in_month|escapejs }}"))
             clips_by_category(JSON.parse("{{ clips_by_category|escapejs }}"))
+            clips_deleted(JSON.parse("{{ clips_deleted|escapejs }}"))
         </script>
     </footer>
 

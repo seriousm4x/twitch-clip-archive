@@ -270,6 +270,19 @@ def statistics(request):
         clips_by_category["datasets"][0]["data"].append(category["amount"])
         clips_by_category["labels"].append(game_title)
 
+    # percentage clips deleted chart
+    clips_offline_count = Clip.objects.filter(deleted_on_twitch=True).count()
+    clips_online_count = Clip.objects.filter(deleted_on_twitch=False).count()
+
+    clips_deleted = {
+        "datasets": [{
+            "data": [clips_offline_count, clips_online_count],
+            "borderWidth": 2,
+            "borderColor": "rgba(255,255,255,1)"
+        }],
+        "labels": ["Clips deleted on twitch", "Clips still live"]
+    }
+
     context = {
         "broadcaster_name": broadcaster_name,
         "headline": globalConf().headline_stats,
@@ -278,7 +291,8 @@ def statistics(request):
         "most_clips_by_user": most_clips_by_user,
         "most_views_by_user": most_views_by_user,
         "clips_in_month": json.dumps(clips_in_month),
-        "clips_by_category": json.dumps(clips_by_category)
+        "clips_by_category": json.dumps(clips_by_category),
+        "clips_deleted": json.dumps(clips_deleted)
     }
 
     return render(request, "clips/stats.html", context)

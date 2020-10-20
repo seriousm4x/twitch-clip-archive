@@ -34,3 +34,21 @@ function clips_by_category(data) {
         }
     });
 };
+
+function clips_deleted(data) {
+    Chart.defaults.global.legend.display = true;
+    var ctx = document.getElementById('clips_deleted');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                colorschemes: {
+                    scheme: 'tableau.Tableau10'
+                }
+            }
+        }
+    });
+};
