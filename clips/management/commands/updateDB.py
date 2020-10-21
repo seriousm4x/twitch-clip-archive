@@ -76,6 +76,9 @@ class Command(BaseCommand):
         api_url = "https://api.twitch.tv/helix/clips?broadcaster_id={}&first=100&started_at={}".format(
             self.broadcaster_id, started_at)
 
+        # set all clips deleted
+        Clip.objects.all().update(deleted_on_twitch=True)
+
         # add clips to db
         while True:
             req = requests.get(api_url, headers=self.helix_header)
@@ -96,6 +99,9 @@ class Command(BaseCommand):
 
                 clip_id = valid_dict["id"]
                 valid_dict.pop("id", None)
+
+                # set deleted false
+                valid_dict["deleted_on_twitch"] = False
 
                 Clip.objects.update_or_create(
                     clip_id=clip_id,
