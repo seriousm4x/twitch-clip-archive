@@ -10,5 +10,5 @@ pytz==2020.5
 requests==2.25.1
 six==1.15.0
 sqlparse==0.4.1
-urllib3==1.26.2
+urllib3==1.26.3
 youtube-dl==2021.2.4.1
