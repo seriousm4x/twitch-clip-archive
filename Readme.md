@@ -36,8 +36,6 @@ cd django-twitch-archive
 
 Copy [TEMPLATE.env](TEMPLATE.env) to '.env' and edit it with your variables.
 
-Important note if you already have a running instance: Since the project moved to docker, the database moved from sqlite to postgresql. If you want to keep your old database, export it with `python manage.py dumpdata > datadump.json`. I will do the rest for you.
-
 ```
 docker-compose up
 ```

@@ -9,12 +9,6 @@ fi
 python -u manage.py makemigrations
 python -u manage.py migrate
 
-# Import data from sqlite
-if [ -f "datadump.json" ]; then
-    python -u manage.py loaddata datadump.json
-    rm datadump.json
-fi
-
 # Create superuser if none exists
 python -u manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('$DJANGO_SUPERUSER_USER', password='$DJANGO_SUPERUSER_PASSWORD') if not User.objects.filter(username='$DJANGO_SUPERUSER_USER').exists() else print('Django user exists')"
 
