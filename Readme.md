@@ -42,9 +42,8 @@ docker-compose up
 
 Congrats, we are up and running for development or private use. Open up [http://localhost:8000](http://localhost:8000). If you want to publish your archive, go on reading.
 
-# Going for production
 
-If you deploy for production, you shouldn't use the default django key in your .env file. Go ahead and generate a new one.
+Also, you shouldn't use the default django key in your .env file. Go ahead and generate a new one.
 
 ```
 docker exec -it dta-web python manage.py shell -c 'from django.core.management import utils; print(utils.get_random_secret_key())'
@@ -54,7 +53,9 @@ Edit and paste the generated key in your .env file under DJANGO_SECRET_KEY.
 
 Also set DJANGO_DEBUG=False and enter your domain under DJANGO_ALLOWED_HOSTS.
 
-## Caddy Server config for reverse proxy
+## Reverse proxy setup (Caddy)
+
+A webserver with reverse proxy is required. You can just use the caddy example below or use your personal prefered reverse proxy, but make sure to exclude `/static/*` and `/media/*` from reverse proxying.
 
 ```
 yourdomain.com {
