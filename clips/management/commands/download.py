@@ -46,28 +46,26 @@ class Command(BaseCommand):
     def handle(self, **options):
         print("Downloading clips")
         self.downloadClips()
-        print("Success")
         print("Downloading clip thumbnails")
         self.downloadClipThumbs()
-        print("Success")
         print("Downloading game thumbnails")
         self.downloadGameThumbs()
-        print("Success")
 
     def downloadClips(self):
         i = 0
         for clip in self.all_clips:
             i += 1
-            print("Clip", i, "of", Clip.objects.count(), clip.clip_id)
 
             # skip clip if already archived
             if clip.clip_archived:
-                print("Clip already archived")
+                print("Clip", i, "of", Clip.objects.count(),
+                      "already archived", f"[{clip.clip_id}]")
                 continue
 
             # skip clip deleted on twitch
             if clip.deleted_on_twitch:
-                print("Clip deleted on twitch")
+                print("Clip", i, "of", Clip.objects.count(),
+                      "deleted on twitch", f"[{clip.clip_id}]")
                 continue
 
             ydl_opts = {
