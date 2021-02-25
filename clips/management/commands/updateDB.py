@@ -60,10 +60,8 @@ class Command(BaseCommand):
         print("Updated Twitch credentials")
         print("Filling database with clips")
         self.updateClips()
-        print("Success")
         print("Filling database with games")
         self.updateGames()
-        print("Success")
 
     def updateClips(self):
         channel_creation_date = requests.get(
