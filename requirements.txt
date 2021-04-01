@@ -12,3 +12,4 @@ six==1.15.0
 sqlparse==0.4.1
 urllib3==1.26.3
 youtube-dl==2021.2.4.1
+wheel==0.36.2
