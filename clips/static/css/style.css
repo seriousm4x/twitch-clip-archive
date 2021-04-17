@@ -18,3 +18,8 @@
         background-color: #1e1f25 !important;
     }
 }
+
+img, video {
+    height: auto;
+    width: 100%;
+}
