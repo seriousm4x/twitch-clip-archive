@@ -1,7 +1,7 @@
 FROM python:3-alpine
 
 RUN apk update && \
-    apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev bash
+    apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev bash git
 
 WORKDIR /opt/app
 COPY . .

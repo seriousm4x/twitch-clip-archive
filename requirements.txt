@@ -11,5 +11,6 @@ requests==2.25.1
 six==1.16.0
 sqlparse==0.4.1
 urllib3==1.26.5
-youtube-dl==2021.5.16
+#youtube-dl==2021.5.16
+git+https://github.com/ytdl-org/youtube-dl.git
 wheel==0.36.2
