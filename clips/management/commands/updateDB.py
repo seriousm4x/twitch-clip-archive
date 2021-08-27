@@ -29,12 +29,6 @@ class Command(BaseCommand):
                 "Authorization": "Bearer {}".format(self.bearer),
             }
 
-            self.kraken_header = {
-                "Client-ID": self.client_id,
-                "Authorization": "Bearer {}".format(self.bearer),
-                "Accept": "application/vnd.twitchtv.v5+json"
-            }
-
             # get broadcaster_id
             self.profile_response = requests.get(
                 self.profileurl, headers=self.helix_header)
@@ -65,8 +59,8 @@ class Command(BaseCommand):
 
     def updateClips(self):
         channel_creation_date = requests.get(
-            "https://api.twitch.tv/kraken/channels/{}".format(
-                self.broadcaster_id), headers=self.kraken_header).json()["created_at"]
+            "https://api.twitch.tv/helix/users?id={}".format(
+                self.broadcaster_id), headers=self.helix_header).json()["data"][0]["created_at"]
 
         week = 1
         started_at = (datetime.datetime.now() -
