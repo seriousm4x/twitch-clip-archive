@@ -284,6 +284,10 @@ def statistics(request):
     }
 
     context = {
+        "total_clip_count": Clip.objects.all().count(),
+        "total_clips_deleted": Clip.objects.filter(deleted_on_twitch=True).distinct().count(),
+        "total_clippers_count": Clip.objects.all().values("creator_id").distinct().count(),
+        "total_game_count": Game.objects.all().count(),
         "broadcaster_name": broadcaster_name,
         "headline": globalConf().headline_stats,
         "games": games,

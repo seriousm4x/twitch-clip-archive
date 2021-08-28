@@ -11,37 +11,45 @@
 
     {% include "clips/navbar.html" %}
 
-    <div class="container is-fluid">
+    <div class="container">
         <div class="columns is-desktop">
             <div class="column is-two-thirds-desktop">
-                <h1 class="title is-spaced my-6">
-                    {{ clip.title }}
-                </h1>
                 {% if clip %}
                 {% if not clip.clip_archived %}
-                <img width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline" /> {% else %}
-                <video width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg"
-                    controls>
+                <img class="mt-6" width="100%" height="auto" src="{% static 'svg/clip-offline.svg' %}" alt="offline" />
+                {% else %}
+                <video class="mt-6" width="100%" height="auto" poster="{{ MEDIA_URL }}clip_thumbnails/{{ clip.clip_id }}.jpg" controls>
                     <source src="{{ MEDIA_URL }}clips/{{ clip.clip_id }}.mp4" type="video/mp4">
-                </video> {% endif %}
-                <div>
-                    <div>
-                        <span class="tag is-primary is-large my-1">{{ clip.game_title }}</span>
-                        <span class="tag is-primary is-large my-1">{{ clip.view_count|intcomma }}
-                            Views</span>
-                        <span class="tag is-primary is-large my-1">{{ clip.created_at }}</span>
-                        <a class="tag is-primary is-large my-1" href="https://twitch.tv/{{ clip.creator_name }}"
-                            target="_new">
-                            {{ clip.creator_name }}
-                        </a>
-                        {% if clip.deleted_on_twitch %}
-                        <span class="tag is-primary is-large is-danger my-1">Deleted on Twitch</span>
-                        {% else %}
-                        <a class="tag is-primary is-large my-1" href="{{ clip.url }}" target="_new">
-                            Clip on Twitch
-                        </a>
-                        {% endif %}
-                    </div>
+                </video>
+                {% endif %}
+                <h1 class="title is-spaced my-2">
+                    {{ clip.title }}
+                </h1>
+                <div class="box">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64">
+                                <img src="{{ clip.game_thumb }}" alt="{{ clip.game_title }}">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <strong>{{ clip.game_title }}</strong>
+                                    <br>
+                                    {{ clip.creator_name }}<br>
+                                    {{ clip.view_count|intcomma }} Views - {{ clip.created_at|date:"Y.m.d" }}<br>
+                                    {% if clip.deleted_on_twitch %}
+                                    Deleted on Twitch
+                                    {% else %}
+                                    <a href="{{ clip.url }}" target="_blank">
+                                        Clip on Twitch
+                                    </a>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
                 </div>
                 {% else %}
                 <div class="column is-full">

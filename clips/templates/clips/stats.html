@@ -10,10 +10,48 @@
 
     {% include "clips/navbar.html" %}
 
-    <div class="container is-fluid">
-        <h1 class="title is-spaced my-6">
+    <div class="container">
+        <h1 class="title is-spaced mt-6">
             {{ headline }}
         </h1>
+        <section class="hero">
+            <div class="hero-body">
+                <div class="columns is-multiline has-text-centered">
+                    <div class="column">
+                        <p class="title">
+                            {{ total_clip_count|intcomma }}
+                        </p>
+                        <p class="subtitle">
+                            Clips
+                        </p>
+                    </div>
+                    <div class="column">
+                        <p class="title">
+                            {{ total_clips_deleted|intcomma }}
+                        </p>
+                        <p class="subtitle">
+                            Clips deleted
+                        </p>
+                    </div>
+                    <div class="column">
+                        <p class="title">
+                            {{ total_clippers_count|intcomma }}
+                        </p>
+                        <p class="subtitle">
+                            Clippers
+                        </p>
+                    </div>
+                    <div class="column">
+                        <p class="title">
+                            {{ total_game_count|intcomma }}
+                        </p>
+                        <p class="subtitle">
+                            Games
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="columns">
             <div class="column">
                 <h2 class="title">Most clips per user</h2>
