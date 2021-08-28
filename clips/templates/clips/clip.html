@@ -43,8 +43,8 @@
                                 <p>
                                     <strong>{{ clip.game_title }}</strong>
                                     <br>
-                                    {{ clip.creator_name }}<br>
                                     {{ clip.view_count|intcomma }} Views - {{ clip.created_at }}<br>
+                                    <a href="https://twitch.tv/{{ clip.creator_name }}">{{ clip.creator_name }}</a><br>
                                     {% if clip.deleted_on_twitch %}
                                     Deleted on Twitch
                                     {% else %}
