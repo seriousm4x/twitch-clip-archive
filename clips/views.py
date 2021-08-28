@@ -1,6 +1,5 @@
 import datetime
 import json
-import os
 
 from dateutil import relativedelta
 from django.core.exceptions import ObjectDoesNotExist
