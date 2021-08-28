@@ -29,7 +29,13 @@
                     <article class="media">
                         <div class="media-left">
                             <figure class="image is-64x64">
-                                <img src="{{ clip.game_thumb }}" alt="{{ clip.game_title }}">
+                                {% if clip.game_id %}
+                                <img src="{{ MEDIA_URL }}game_thumbnails/{{ clip.game_id }}.jpg" loading="lazy"
+                                    alt="{{ clip.game_title }}">
+                                {% else %}
+                                <img class="unknown_game" src="{% static 'svg/unknown_game.svg' %}" loading="lazy"
+                                    alt="{{ clip.game_title }}">
+                                {% endif %}
                             </figure>
                         </div>
                         <div class="media-content">
