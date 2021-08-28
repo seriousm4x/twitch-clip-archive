@@ -33,8 +33,8 @@
                         {{ clip.title|truncatechars:47 }}
                     </p>
                     <p class="subtitle is-6">
+                        {{ clip.view_count|intcomma }} Views<br>
                         {{ clip.created_at }}
-                        <br>{{ clip.view_count|intcomma }} Views
                     </p>
                 </div>
             </div>

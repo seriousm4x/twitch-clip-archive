@@ -11,8 +11,6 @@ def matchGameToClip(cliplist):
         else:
             cliplist.game_title = Game.objects.filter(
                 game_id=cliplist.game_id).get().name
-            cliplist.game_thumb = Game.objects.filter(
-                game_id=cliplist.game_id).get().box_art_url
     else:
         for clip in cliplist:
             if clip.game_id == None:
@@ -20,5 +18,3 @@ def matchGameToClip(cliplist):
             else:
                 clip.game_title = Game.objects.filter(
                     game_id=clip.game_id).get().name
-                clip.game_thumb = Game.objects.filter(
-                game_id=clip.game_id).get().box_art_url

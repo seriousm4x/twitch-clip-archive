@@ -44,7 +44,7 @@
                                     <strong>{{ clip.game_title }}</strong>
                                     <br>
                                     {{ clip.creator_name }}<br>
-                                    {{ clip.view_count|intcomma }} Views - {{ clip.created_at|date:"Y.m.d" }}<br>
+                                    {{ clip.view_count|intcomma }} Views - {{ clip.created_at }}<br>
                                     {% if clip.deleted_on_twitch %}
                                     Deleted on Twitch
                                     {% else %}
