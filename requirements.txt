@@ -10,6 +10,6 @@ pytz==2021.1
 requests==2.26.0
 six==1.16.0
 sqlparse==0.4.2
-urllib3==1.26.6
+urllib3==1.26.7
 youtube-dl==2021.06.06
 wheel==0.37.0
