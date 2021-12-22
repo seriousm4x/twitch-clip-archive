@@ -34,5 +34,5 @@ while :; do
     if [ -n "$DB_BACKUP_DIR" ]; then
         python -u manage.py dumpdata > "${DB_BACKUP_DIR}dump_$(date +%Y-%m-%d"_"%H_%M_%S).json"
     fi
-    sleep $(( 6 * 60 * 60 )) # 6 hours
+    sleep $(( 24 * 60 * 60 )) # 24 hours
 done
