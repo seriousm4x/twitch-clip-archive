@@ -2,7 +2,7 @@
     <img src="clips/static/svg/logo.svg" align="center" alt="Django-Twitch-Archive
     " width="200"/>
     <p align="center">
-        <strong>Django-Twitch-Archive</strong>
+        <strong>Twitch Clip Archive</strong>
     </p>
 </P>
 
