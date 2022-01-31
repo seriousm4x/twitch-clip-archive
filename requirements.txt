@@ -1,13 +1,8 @@
 asgiref==3.5.0
 certifi==2021.10.8
 chardet==4.0.0
-<<<<<<< HEAD
-charset-normalizer==2.0.11
-Django==4.0
-=======
 charset-normalizer==2.0.9
 Django==4.0.1
->>>>>>> origin/dependabot/pip/django-4.0.1
 gunicorn==20.1.0
 idna==3.3
 psycopg2-binary==2.9.3
