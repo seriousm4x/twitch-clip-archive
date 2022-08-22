@@ -1,7 +1,7 @@
 asgiref==3.5.2
 certifi==2022.6.15
 chardet==5.0.0
-charset-normalizer==2.1.0
+charset-normalizer==2.1.1
 Django==4.1
 gunicorn==20.1.0
 idna==3.3
