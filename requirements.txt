@@ -11,4 +11,4 @@ requests
 six
 sqlparse
 urllib3
-youtube-dl
+yt-dlp

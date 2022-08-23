@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 
 import requests
-import youtube_dl
+import yt_dlp
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -77,12 +77,12 @@ class Command(BaseCommand):
 
             # download clip
             try:
-                with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     ydl.download([clip.url])
                 clip.clip_archived = True
                 clip.deleted_on_twitch = False
                 clip.save()
-            except youtube_dl.utils.DownloadError:
+            except yt_dlp.utils.DownloadError:
                 clip.deleted_on_twitch = True
                 clip.save()
 
