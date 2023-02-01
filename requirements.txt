@@ -7,6 +7,7 @@ gunicorn
 idna
 psycopg2-binary
 python-dateutil
+python-dotenv
 requests
 six
 sqlparse
